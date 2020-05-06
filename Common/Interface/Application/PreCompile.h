@@ -21,6 +21,6 @@
 
 #include <tchar.h>
 
-#include "Toolkit.h"
+#include "Tool/Toolkit.h"
 
 #endif // INTERFACE_PRECOMPILE_H

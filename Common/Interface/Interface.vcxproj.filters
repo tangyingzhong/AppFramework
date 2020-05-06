@@ -53,10 +53,10 @@
     <ClInclude Include="Interfaces\Common\PluginBase.h">
       <Filter>Interfaces\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Interfaces\IVoiceLocalDB.h">
+    <ClInclude Include="Interfaces\ILocalDB.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Interfaces\IVoicePlayer.h">
+    <ClInclude Include="Interfaces\IPlayer.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
   </ItemGroup>

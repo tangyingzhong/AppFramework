@@ -85,7 +85,7 @@ public:
 	// Set plugin name
 	virtual Boolean SetName(String strName)
 	{
-		if (strName.IsNone())
+		if (strName.IsEmpty())
 		{
 			return false;
 		}
