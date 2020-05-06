@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Application">
+      <UniqueIdentifier>{985010f3-65fb-4855-a3a3-7e3396f90323}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{00151c7b-3758-45ef-ae6c-89407a82e242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\Common">
+      <UniqueIdentifier>{3d7f2756-8bc5-4e19-8a93-c86a92ace319}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{695925ba-b9ae-487a-984b-70cebb4a5da4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Application\dllmain.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Interface.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\PreCompile.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application\targetver.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\PreCompile.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Interface.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Common\IPlugin.h">
+      <Filter>Interfaces\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Common\PluginGenerator.h">
+      <Filter>Interfaces\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Common\IApplicationContext.h">
+      <Filter>Interfaces\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Common\IMicroCore.h">
+      <Filter>Interfaces\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Common\IPluginManager.h">
+      <Filter>Interfaces\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Common\PluginBase.h">
+      <Filter>Interfaces\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IVoiceLocalDB.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IVoicePlayer.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
