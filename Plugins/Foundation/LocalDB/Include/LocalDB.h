@@ -12,6 +12,9 @@
 #define LOCALDB_H
 
 #include "ILocalDB.h"
+#include "SqliteDB.h"
+
+using namespace System::DataBase;
 
 class LocalDB:public PluginBase<ILocalDB>
 {
@@ -27,7 +30,7 @@ private:
 	LocalDB(const LocalDB& other){	}
 	
 	// Forbid the assigment of LocalDB
-	LocalDB& operator=(const LocalDB& other){	}
+	LocalDB& operator=(const LocalDB& other) { return *this; }
 	
 public:
 	// Configure the db

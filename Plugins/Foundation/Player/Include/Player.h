@@ -27,7 +27,7 @@ private:
 	Player(const Player& other){	}
 
 	// Forbid the player's assignment
-	Player& operator=(const Player& other){		}
+	Player& operator=(const Player& other){ return *this; }
 
 public:
 	// Run the audio

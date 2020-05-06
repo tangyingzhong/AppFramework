@@ -5,8 +5,8 @@ GENERATE_PLUGIN(LOCALDB_PLUGIN, LocalDB);
 
 // Construct the LocalDB
 LocalDB::LocalDB() :
-	m_strDbFilePath("")),
-	m_strErrorMsg("")),
+	m_strDbFilePath(String("")),
+	m_strErrorMsg(String("")),
 	m_bDisposed(false)
 {
 	Initialize();
