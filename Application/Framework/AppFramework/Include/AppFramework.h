@@ -38,7 +38,7 @@ private:
 	AppFramework(const AppFramework& other){	}
 
 	// Forbid the AppFramework's assignment
-	AppFramework& operator=(const AppFramework& other){	}
+	AppFramework& operator=(const AppFramework& other) { return *this; }
 
 public:
 	// Get global AppFramework context

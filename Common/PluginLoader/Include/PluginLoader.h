@@ -42,11 +42,12 @@ public:
 		}
 	}
 
+private:
 	// Forbid the plugin Loader's copy
 	PluginLoader(const PluginLoader& other){	}
 
 	// Forbid the Loader's assigment
-	PluginLoader& operator=(const PluginLoader& other){		}
+	PluginLoader& operator=(const PluginLoader& other){ return *this; }
 
 public:
 	// Load the plugin

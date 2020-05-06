@@ -33,7 +33,7 @@ private:
 	MicroCore(const MicroCore& other) {	}
 
 	// Forbid the assigment of kernel
-	MicroCore& operator=(const MicroCore& other) {	}
+	MicroCore& operator=(const MicroCore& other) { return *this; }
 
 public:
 	// Start the micro kernel

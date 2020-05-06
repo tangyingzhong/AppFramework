@@ -35,7 +35,7 @@ private:
 	ApplicationContext(const ApplicationContext& other){	}
 
 	// Forbid the context's assignment
-	ApplicationContext& operator=(const ApplicationContext& other){	}
+	ApplicationContext& operator=(const ApplicationContext& other){ return *this; }
 
 public:
 	// Start the micro engine
