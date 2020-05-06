@@ -113,7 +113,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>EXPORT_FUNCTION;WIN32;_DEBUG;_WINDOWS;_USRDLL;MICROCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Application\Framework\PluginManager\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Plugins\Core\PluginManager\Include</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
       <CallingConvention>Cdecl</CallingConvention>
@@ -138,6 +138,7 @@
       <PreprocessorDefinitions>EXPORT_FUNCTION;_DEBUG;_WINDOWS;_USRDLL;MICROCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Plugins\Core\PluginManager\Include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -158,7 +159,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>EXPORT_FUNCTION;WIN32;NDEBUG;_WINDOWS;_USRDLL;MICROCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Application\Framework\PluginManager\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Plugins\Core\PluginManager\Include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
       <CallingConvention>Cdecl</CallingConvention>
       <CompileAs>Default</CompileAs>
@@ -186,6 +187,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>EXPORT_FUNCTION;NDEBUG;_WINDOWS;_USRDLL;MICROCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Plugins\Core\PluginManager\Include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -111,7 +111,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Framework\ApplicationContext\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(ProjectDir)..\..\..\Common\PluginLoader\Include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Plugins\Core\ApplicationContext\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -123,7 +123,7 @@
       <Path>$(Configuration)\(MSBuildProjectName).log</Path>
     </BuildLog>
     <Lib>
-      <AdditionalDependencies>Toolkit.lib</AdditionalDependencies>
+      <AdditionalDependencies>Toolkit.lib;</AdditionalDependencies>
       <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Lib>
@@ -135,7 +135,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Framework\ApplicationContext\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(ProjectDir)..\..\..\Common\PluginLoader\Include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Plugins\Core\ApplicationContext\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -147,7 +147,7 @@
       <Path>$(Configuration)\(MSBuildProjectName).log</Path>
     </BuildLog>
     <Lib>
-      <AdditionalDependencies>Toolkit.lib</AdditionalDependencies>
+      <AdditionalDependencies>Toolkit.lib;</AdditionalDependencies>
       <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Lib>
@@ -161,7 +161,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Framework\ApplicationContext\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(ProjectDir)..\..\..\Common\PluginLoader\Include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Plugins\Core\ApplicationContext\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
       <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
@@ -175,7 +175,7 @@
       <Path>$(Configuration)\(MSBuildProjectName).log</Path>
     </BuildLog>
     <Lib>
-      <AdditionalDependencies>Toolkit.lib</AdditionalDependencies>
+      <AdditionalDependencies>Toolkit.lib;</AdditionalDependencies>
       <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Lib>
@@ -189,7 +189,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Framework\ApplicationContext\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(ProjectDir)..\..\..\Common\PluginLoader\Include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Plugins\Core\ApplicationContext\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
       <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
@@ -203,7 +203,7 @@
       <Path>$(Configuration)\(MSBuildProjectName).log</Path>
     </BuildLog>
     <Lib>
-      <AdditionalDependencies>Toolkit.lib</AdditionalDependencies>
+      <AdditionalDependencies>Toolkit.lib;</AdditionalDependencies>
       <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Lib>
