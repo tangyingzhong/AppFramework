@@ -21,8 +21,6 @@
 
 #include <assert.h>
 
-#include "Toolkit.h"
-
-#include "SystemLog.h"
+#include "Tool/Toolkit.h"
 
 #endif // MICRO_PRECOMPILE_H

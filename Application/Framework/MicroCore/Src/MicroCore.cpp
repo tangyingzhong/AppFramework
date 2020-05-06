@@ -4,7 +4,8 @@
 GENERATE_PLUGIN(MICRO_CORE_PLUGIN, MicroCore);
 
 // Construct the Kernel
-MicroCore::MicroCore() :m_pPluginController(NULL),
+MicroCore::MicroCore() :
+	m_pPluginController(NULL),
 	m_bDisposed(false)
 {
 	Initialize();

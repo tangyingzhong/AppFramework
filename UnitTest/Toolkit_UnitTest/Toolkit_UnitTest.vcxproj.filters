@@ -37,15 +37,6 @@
     <ClCompile Include="StringTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LibUrlTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ExcelTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WordTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

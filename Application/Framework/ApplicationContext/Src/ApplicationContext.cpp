@@ -4,8 +4,9 @@
 GENERATE_PLUGIN(APPLICATION_CONTEXT_PLUGIN, ApplicationContext);
 
 // Construct the context
-ApplicationContext::ApplicationContext() :m_pMicroCoreModule(NULL),
-m_bDisposed(false)
+ApplicationContext::ApplicationContext() :
+	m_pMicroCoreModule(NULL),
+	m_bDisposed(false)
 {
 	Initialize();
 }

@@ -12,7 +12,7 @@
 #ifndef PLUGINPTR_H
 #define PLUGINPTR_H
 
-#include "IApplicationContext.h"
+#include "Common/IApplicationContext.h"
 #include "AppFramework.h"
 
 template <class T>
@@ -65,7 +65,7 @@ public:
 	// Forbid the plugin pointer's copy
 	PluginPtr(const PluginPtr& other)
 	{
-		SetPointer(const_cast<Pointer>other->GetPointer());
+		SetPointer(const_cast<Pointer>(other->GetPointer()));
 
 		other->SetPointer(NULL);
 	}
@@ -84,7 +84,7 @@ public:
 				}
 			}
 
-			SetPointer(const_cast<Pointer>other->GetPointer());
+			SetPointer(const_cast<Pointer>(other->GetPointer()));
 
 			other->SetPointer(NULL);
 		}
@@ -99,7 +99,7 @@ public:
 		Int32 iMinorVersion,
 		Int32 iModifyVersion)
 	{
-		if (strPluginName.IsNone())
+		if (strPluginName.IsEmpty())
 		{
 			return false;
 		}

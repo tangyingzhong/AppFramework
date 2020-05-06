@@ -11,7 +11,7 @@
 #ifndef	SYSTEM_APP_H
 #define SYSTEM_APP_H
 
-#include "IApplicationContext.h"
+#include "Common/IApplicationContext.h"
 #include "AppFramework.h"
 
 class App
@@ -26,20 +26,6 @@ public:
 	typedef void* Form;
 	typedef std::map<std::string, Form> FormContainer;
 	
-	// It is for libcurl's one time initialize
-	struct CurlInit
-	{
-		CurlInit()
-		{
-			LibCurl::InitCurl();
-		}
-
-		~CurlInit()
-		{
-			LibCurl::DestoryCurl();
-		}
-	};
-
 	// App's quit code
 	enum APP_CODE_ENUM
 	{
@@ -84,7 +70,7 @@ public:
 	None CloseOtherWindows();
 
 	// Add the window
-	None AddWindow(String formName, QWidget* view);
+	None AddWindow(String formName, Form pView);
 
 	// Remove the window
 	BOOL RemoveWindow(String formName);
@@ -98,9 +84,6 @@ private:
 
 	// Destory the application
 	None Destory();
-
-	// Destory the lib curl
-	static None DestoryLibCurl();
 
 	// Create the application
 	None CreateApplication(ParamenterCount argc, ParamenterList argv);
@@ -127,17 +110,17 @@ private:
 	None DestoryAppContext();
 
 private:
-	// Get the Application
-	inline Program GetApplication() const
-	{
-		return m_pApplication;
-	}
+	//// Get the Application
+	//inline Program GetApplication() const
+	//{
+	//	return m_pApplication;
+	//}
 
-	// Set the Application
-	inline None SetApplication(Program pApplication)
-	{
-		m_pApplication = pApplication;
-	}
+	//// Set the Application
+	//inline None SetApplication(Program pApplication)
+	//{
+	//	m_pApplication = pApplication;
+	//}
 
 	// Get the View
 	inline StartView GetStartView() const
@@ -207,11 +190,8 @@ private:
 	// The instance of application
 	static App* m_pInstance;
 
-	// Libcurl initialize
-	static CurlInit* m_pCurIinit;
-
 	// Application
-	Program m_pApplication;
+	//Program m_pApplication;
 
 	// Paramenter count
 	ParamenterCount m_iArgc;

@@ -21,11 +21,9 @@
 
 #include <map>
 
-#include "Toolkit.h"
+#include "Tool/Toolkit.h"
 
-#include "SystemLog.h"
-
-#include "PluginBase.h"
+#include "Common/PluginBase.h"
 
 using namespace std;
 

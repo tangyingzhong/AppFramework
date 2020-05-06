@@ -46,7 +46,7 @@ None PluginManager::InitPluginConfigure()
 // Init the plugin name table
 None PluginManager::InitPluginNameTable()
 {
-	if (GetPluginConfigureFilePath().IsNone())
+	if (GetPluginConfigureFilePath().IsEmpty())
 	{
 		return;
 	}
@@ -70,7 +70,7 @@ None PluginManager::InitPluginNameTable()
 // Clear the plugin name table
 None PluginManager::ClearPluginNameTable()
 {
-	if (GetPluginNameTable().None())
+	if (GetPluginNameTable().empty())
 	{
 		return;
 	}
@@ -83,7 +83,7 @@ None PluginManager::ClearPluginNameTable()
 // Clear the plugin table
 None PluginManager::ClearPluginMapTable()
 {
-	if (m_PluginMapTable.None())
+	if (m_PluginMapTable.empty())
 	{
 		LOG_DEBUG(String(_T("Plugin table is None")), _T(""));
 
@@ -93,7 +93,7 @@ None PluginManager::ClearPluginMapTable()
 	for (PluginMapTable::iterator ModuleIter = m_PluginMapTable.begin();
 		ModuleIter != m_PluginMapTable.end();)
 	{
-		String strModuleName = (StdString)(ModuleIter->first);
+		String strModuleName = (std::string)(ModuleIter->first);
 
 		UnRegisterModule(strModuleName);
 
@@ -108,12 +108,12 @@ None PluginManager::ClearPluginMapTable()
 // Is module has been loaded
 Boolean PluginManager::IsModuleLoaded(String strModuleName)
 {
-	if (strModuleName.IsNone())
+	if (strModuleName.IsEmpty())
 	{
 		return false;
 	}
 
-	if (m_PluginMapTable.find(strModuleName.CStr())!= m_PluginMapTable.end())
+	if (m_PluginMapTable.find(strModuleName.ToANSIData())!= m_PluginMapTable.end())
 	{
 		return true;
 	}
@@ -124,7 +124,7 @@ Boolean PluginManager::IsModuleLoaded(String strModuleName)
 // Create a plugin
 PluginManager::Loader PluginManager::CreatePlugin(String strPluginName)
 {
-	if (strPluginName.IsNone())
+	if (strPluginName.IsEmpty())
 	{
 		return NULL;
 	}
@@ -150,7 +150,7 @@ None PluginManager::DestoryPlugin(Loader pLoader)
 // Create plugin modules
 None PluginManager::CreatePluginModules(PluginNameTable& Table)
 {
-	if (Table.None())
+	if (Table.empty())
 	{
 		LOG_DEBUG(String(_T("Plugin table is None")), _T(""));
 
@@ -178,7 +178,7 @@ None PluginManager::CreatePluginModules(PluginNameTable& Table)
 // Create the module
 Boolean PluginManager::CreateModule(String strPluginName, Loader& pLoader)
 {
-	if (strPluginName.IsNone())
+	if (strPluginName.IsEmpty())
 	{
 		return false;
 	}
@@ -216,7 +216,7 @@ None PluginManager::DestoryPluginNameTable()
 // Add module to the table
 Boolean PluginManager::RegisterModule(String strPluginName, Loader pLoader)
 {
-	if (strPluginName.IsNone())
+	if (strPluginName.IsEmpty())
 	{
 		return false;
 	}
@@ -227,12 +227,12 @@ Boolean PluginManager::RegisterModule(String strPluginName, Loader pLoader)
 	}
 
 	// Find that if the plugin existed in the table
-	if (m_PluginMapTable.find(strPluginName.CStr()) != m_PluginMapTable.end())
+	if (m_PluginMapTable.find(strPluginName.ToANSIData()) != m_PluginMapTable.end())
 	{
 		return false;
 	}
 
-	m_PluginMapTable[strPluginName.CStr()] = pLoader;
+	m_PluginMapTable[strPluginName.ToANSIData()] = pLoader;
 
 	return true;
 }
@@ -240,17 +240,17 @@ Boolean PluginManager::RegisterModule(String strPluginName, Loader pLoader)
 // Remove module from the table
 Boolean PluginManager::UnRegisterModule(String strPluginName)
 {
-	if (strPluginName.IsNone())
+	if (strPluginName.IsEmpty())
 	{
 		return false;
 	}
 
-	if (m_PluginMapTable.None())
+	if (m_PluginMapTable.empty())
 	{
 		return false;
 	}
 
-	PluginMapTable::iterator ModuleIter = m_PluginMapTable.find(strPluginName.CStr());
+	PluginMapTable::iterator ModuleIter = m_PluginMapTable.find(strPluginName.ToANSIData());
 
 	if (ModuleIter !=m_PluginMapTable.end())
 	{
@@ -296,7 +296,7 @@ IPlugin* PluginManager::GetPlugin(String strPluginName,
 	Int32 iMinorVersion,
 	Int32 iModifyVersion)
 {
-	if (strPluginName.IsNone())
+	if (strPluginName.IsEmpty())
 	{
 		return NULL;
 	}
@@ -316,12 +316,12 @@ IPlugin* PluginManager::GetPlugin(String strPluginName,
 		return NULL;
 	}
 
-	if (m_PluginMapTable.None())
+	if (m_PluginMapTable.empty())
 	{
 		return NULL;
 	}
 
-	PluginMapTable::iterator ModuleIter = m_PluginMapTable.find(strPluginName.CStr());
+	PluginMapTable::iterator ModuleIter = m_PluginMapTable.find(strPluginName.ToANSIData());
 
 	if (ModuleIter != m_PluginMapTable.end())
 	{

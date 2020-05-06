@@ -22,7 +22,7 @@ namespace Tool_UnitTest
 
 			Assert::IsTrue(strFinal1 == _T("其实我也不知道为甚"));
 
-			std::string strUtf8 = UTF8::GetString(strFinal1.CStr(),ENCODE_ANSI);
+			std::string strUtf8 = UTF8::GetString(strFinal1.CStr());
 
 			std::string strFinal21 = ANSI::GetString(strUtf8,ENCODE_UTF8);
 
@@ -106,11 +106,11 @@ namespace Tool_UnitTest
 
 			String strNew1 = strTest.Left(9090);
 
-			Assert::IsTrue(strNew1.IsNone());
+			Assert::IsTrue(strNew1.IsEmpty());
 
 			String strNew2 = strTest.Left(-1);
 
-			Assert::IsTrue(strNew2.IsNone());
+			Assert::IsTrue(strNew2.IsEmpty());
 
 			String strNew3 = strTest.Left(strTest.GetLength());
 
@@ -239,7 +239,7 @@ namespace Tool_UnitTest
 		{
 			String strTest = _T("I need an assistant 我很幸运");
 
-			std::string strAnsi = strTest.ToAnsiData();
+			std::string strAnsi = strTest.ToANSIData();
 
 			Assert::IsTrue(strAnsi == "I need an assistant 我很幸运");
 		}
@@ -331,11 +331,11 @@ namespace Tool_UnitTest
 		{
 			String strTest = _T("Great you are!");
 
-			Assert::IsFalse(strTest.IsNone());
+			Assert::IsFalse(strTest.IsEmpty());
 
 			String strTest2 =_T("");
 
-			Assert::IsTrue(strTest2.IsNone());
+			Assert::IsTrue(strTest2.IsEmpty());
 		}
 
 		TEST_METHOD(TestMethod_operator_CStr)

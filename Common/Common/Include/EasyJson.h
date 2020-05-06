@@ -25,7 +25,7 @@ private:
 	EasyJson(const EasyJson& other){	}
 	
 	// Forbid the assigment of EasyJson
-	EasyJson& operator=(const EasyJson& other){	}
+	EasyJson& operator=(const EasyJson& other) { return *this; }
 
 public:
 	// Get Json document

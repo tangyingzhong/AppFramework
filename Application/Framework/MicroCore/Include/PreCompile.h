@@ -19,10 +19,8 @@
 // Windows Header Files:
 #include <windows.h>
 
-#include "Toolkit.h"
+#include "Tool/Toolkit.h"
 
-#include "SystemLog.h"
-
-#include "PluginBase.h"
+#include "Common/PluginBase.h"
 
 #endif // MICROCORE_PRECOMPILE_H

@@ -11,6 +11,8 @@
 #ifndef IPLUGIN_H
 #define IPLUGIN_H
 
+#define WARN_MESSAGEBOX(Title,Content) MessageBox(NULL,Content,Title,0);
+
 class IPlugin
 {
 public:

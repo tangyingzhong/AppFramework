@@ -2,7 +2,8 @@
 #include  "EasyJson.h"
 
 // Construct the EasyJson
-EasyJson::EasyJson() :m_bDisposed(false)
+EasyJson::EasyJson() :
+	m_bDisposed(false)
 {
 	Initialize();
 }
@@ -31,7 +32,7 @@ None EasyJson::Destory()
 // Get Json document
 Boolean EasyJson::GetJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc)
 {
-	if (strJsonFilePath.IsNone())
+	if (strJsonFilePath.IsEmpty())
 	{
 		return false;
 	}
@@ -44,7 +45,7 @@ Boolean EasyJson::GetJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc)
 // Set Json document
 Boolean EasyJson::SetJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc)
 {
-	if (strJsonFilePath.IsNone())
+	if (strJsonFilePath.IsEmpty())
 	{
 		return false;
 	}
@@ -62,7 +63,7 @@ Boolean EasyJson::SetJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc)
 // Set the device reg to file
 Boolean EasyJson::Save(String& strObject, String strJsonFilePath)
 {
-	if (strJsonFilePath.IsNone() || strObject.IsNone())
+	if (strJsonFilePath.IsEmpty() || strObject.IsEmpty())
 	{
 		return false;
 	}
@@ -74,7 +75,7 @@ Boolean EasyJson::Save(String& strObject, String strJsonFilePath)
 		return false;
 	}
 
-	FileHelper.Write((SByteArray)strObject.ToUtf8Data().c_str(), 0, strObject.ToUtf8Data().length());
+	FileHelper.Write((SByteArray)strObject.ToUTF8Data().c_str(), 0, strObject.ToUTF8Data().length());
 
 	FileHelper.Close();
 

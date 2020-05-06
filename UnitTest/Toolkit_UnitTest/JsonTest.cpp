@@ -139,7 +139,7 @@ namespace Tool_UnitTest
 				}
 			}
 
-			Assert::IsTrue(!NameTable.None());
+			Assert::IsTrue(!NameTable.empty());
 
 			File FileHelper;
 
@@ -148,7 +148,7 @@ namespace Tool_UnitTest
 				Assert::Fail(_T("Failed to create a file"));
 			}
 
-			FileHelper.Write((SByteArray)strProName.ToUtf8Data().c_str(), 0, strProName.ToUtf8Data().length());
+			FileHelper.Write((SByteArray)strProName.ToUTF8Data().c_str(), 0, strProName.ToUTF8Data().length());
 
 			FileHelper.Close();
 		}
@@ -178,7 +178,7 @@ namespace Tool_UnitTest
 				Assert::Fail(_T("Failed to create a file"));
 			}
 
-			FileHelper.Write((SByteArray)strJson.ToUtf8Data().c_str(), 0, strJson.ToUtf8Data().length());
+			FileHelper.Write((SByteArray)strJson.ToUTF8Data().c_str(), 0, strJson.ToUTF8Data().length());
 
 			FileHelper.Close();
 		}

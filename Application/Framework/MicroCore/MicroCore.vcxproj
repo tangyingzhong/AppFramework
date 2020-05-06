@@ -93,25 +93,27 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build\bin_d\</OutDir>
     <EnableManagedIncrementalBuild>true</EnableManagedIncrementalBuild>
+    <IntDir>$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
+    <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build\bin\</OutDir>
     <EnableManagedIncrementalBuild>true</EnableManagedIncrementalBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
+    <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build\bin\</OutDir>
     <EnableManagedIncrementalBuild>true</EnableManagedIncrementalBuild>
+    <IntDir>$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;MICROCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>EXPORT_FUNCTION;WIN32;_DEBUG;_WINDOWS;_USRDLL;MICROCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)Common\Toolkit;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Application\Framework\PluginManager\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Application\Framework\PluginManager\Include</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
       <CallingConvention>Cdecl</CallingConvention>
@@ -121,8 +123,8 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
-      <AdditionalLibraryDirectories>$(SolutionDir)Build\bin_d\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Toolkit.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin_d</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Toolkit.lib;Common.lib;Interface.lib;PluginManager.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\$(MSBuildProjectName).log</Path>
@@ -133,12 +135,15 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;MICROCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>EXPORT_FUNCTION;_DEBUG;_WINDOWS;_USRDLL;MICROCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Toolkit.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\$(MSBuildProjectName).log</Path>
@@ -151,9 +156,9 @@
       <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;MICROCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>EXPORT_FUNCTION;WIN32;NDEBUG;_WINDOWS;_USRDLL;MICROCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)Common\Toolkit;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Application\Framework\PluginManager\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Application\Framework\PluginManager\Include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
       <CallingConvention>Cdecl</CallingConvention>
       <CompileAs>Default</CompileAs>
@@ -165,8 +170,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
-      <AdditionalLibraryDirectories>$(SolutionDir)Build\bin\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Toolkit.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Toolkit.lib;Common.lib;Interface.lib;PluginManager.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\$(MSBuildProjectName).log</Path>
@@ -179,7 +184,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;MICROCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>EXPORT_FUNCTION;NDEBUG;_WINDOWS;_USRDLL;MICROCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
@@ -187,6 +192,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Toolkit.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\$(MSBuildProjectName).log</Path>

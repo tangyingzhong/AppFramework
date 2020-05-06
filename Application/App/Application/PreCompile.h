@@ -21,9 +21,7 @@
 
 #include <map>
 
-#include "Toolkit.h"
-
-#include "SystemLog.h"
+#include "Tool/Toolkit.h"
 
 #include "PluginPtr.h"
 

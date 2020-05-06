@@ -52,7 +52,7 @@ public:
 	// Load the plugin
 	Boolean Load(String strPluginName)
 	{
-		if (strPluginName.IsNone())
+		if (strPluginName.IsEmpty())
 		{
 			return false;
 		}
@@ -65,7 +65,7 @@ public:
 		}
 		else
 		{
-			strModulePath = strModulePath + strPluginName+_T(".dll");
+			strModulePath = strModulePath + strPluginName+ String(".dll");
 		}
 
 		SetConcretLoader(new Loader(strModulePath));

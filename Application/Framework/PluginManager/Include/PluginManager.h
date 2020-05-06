@@ -11,7 +11,7 @@
 #ifndef PLUGINMANAGER_H
 #define PLUGINMANAGER_H
 
-#include "IPluginManager.h"
+#include "Common/IPluginManager.h"
 #include "PluginLoader.h"
 
 class PluginManager :public PluginBase<IPluginManager>
@@ -20,7 +20,7 @@ public:
 	typedef Int32 Index;
 	typedef vector<String> PluginNameTable;
 	typedef PluginLoader<IPlugin>* Loader;
-	typedef std::map<StdString, Loader > PluginMapTable;
+	typedef std::map<std::string, Loader > PluginMapTable;
 	
 public:
 	// Construct the engine

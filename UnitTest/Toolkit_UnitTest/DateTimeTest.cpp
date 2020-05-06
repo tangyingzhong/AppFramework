@@ -10,14 +10,14 @@ namespace Tool_UnitTest
 	public:
 		TEST_METHOD(Test_Now)
 		{
-			DateTime CurTime1 = DateTime::Now(DateTime::TIME_UTC);
+			DateTime CurTime1 = DateTime::Now(DateTime::TIME_UTC_);
 
 			DateTime CurTime2 = DateTime::Now(DateTime::TIME_LOCAL);
 		}
 
 		TEST_METHOD(Test_ToTime_t)
 		{
-			DateTime CurTime1 = DateTime::Now(DateTime::TIME_UTC);
+			DateTime CurTime1 = DateTime::Now(DateTime::TIME_UTC_);
 
 			time_t t1 = CurTime1.ToTime_t();
 
@@ -28,7 +28,7 @@ namespace Tool_UnitTest
 
 		TEST_METHOD(Test_FromTime_t)
 		{
-			DateTime CurTime1 = DateTime::Now(DateTime::TIME_UTC);
+			DateTime CurTime1 = DateTime::Now(DateTime::TIME_UTC_);
 
 			time_t t1 = CurTime1.ToTime_t();
 
@@ -48,7 +48,7 @@ namespace Tool_UnitTest
 
 		TEST_METHOD(Test_ToString)
 		{
-			DateTime CurTime1 = DateTime::Now(DateTime::TIME_UTC);
+			DateTime CurTime1 = DateTime::Now(DateTime::TIME_UTC_);
 
 			String strTime = CurTime1.ToString(_T("yyyy-MM-ddThh:mm:ss"));
 
@@ -64,7 +64,7 @@ namespace Tool_UnitTest
 
 			Assert::IsTrue(CurTime2 == Time2);
 
-			DateTime CurTime11 = DateTime::Now(DateTime::TIME_UTC);
+			DateTime CurTime11 = DateTime::Now(DateTime::TIME_UTC_);
 
 			String strTime11 = CurTime11.ToString(_T("yyyy-MM-ddThh:mm:ss"));
 

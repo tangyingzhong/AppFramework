@@ -19,10 +19,6 @@
 
 #include <map>
 
-#include "Toolkit.h"
-
-#include "SystemLog.h"
-
-using namespace std;
+#include "Tool/Toolkit.h"
 
 #endif // MICROCORE_PRECOMPILE_H

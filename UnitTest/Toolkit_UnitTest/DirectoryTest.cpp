@@ -53,19 +53,19 @@ namespace Tool_UnitTest
 			Assert::IsFalse(Directory::IsExisted(strPath3));
 		}
 
-		TEST_METHOD(Test_IsNone)
+		TEST_METHOD(Test_IsEmpty)
 		{
 			String strPath0 = _T("D:\\");
 
-			Assert::IsFalse(Directory::IsNone(strPath0));
+			Assert::IsFalse(Directory::IsEmpty(strPath0));
 
 			String strPath = _T("D:\\SrcTest");
 
-			Assert::IsFalse(Directory::IsNone(strPath));
+			Assert::IsFalse(Directory::IsEmpty(strPath));
 
 			String strPath1 = _T("D:\\SrcTest\\55");
 
-			Assert::IsTrue(Directory::IsNone(strPath1));
+			Assert::IsTrue(Directory::IsEmpty(strPath1));
 		}
 
 		TEST_METHOD(Test_IsDir)

@@ -107,7 +107,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)Common\Toolkit;$(SolutionDir)Common\Interface;$(SolutionDir)Common\Interface\Interfaces;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Interface\Interfaces;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -124,6 +124,8 @@
     <Lib>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
       <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
+      <AdditionalDependencies>Toolkit.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -133,7 +135,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)Common\Toolkit;$(SolutionDir)Common\Interface;$(SolutionDir)Common\Interface\Interfaces;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Interface\Interfaces;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -150,6 +152,8 @@
     <Lib>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
       <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
+      <AdditionalDependencies>Toolkit.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -161,7 +165,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)Common\Toolkit;$(SolutionDir)Common\Interface;$(SolutionDir)Common\Interface\Interfaces;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Interface\Interfaces;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
       <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
@@ -180,6 +184,8 @@
     <Lib>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
       <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
+      <AdditionalDependencies>Toolkit.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -191,7 +197,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)Common\Toolkit;$(SolutionDir)Common\Interface;$(SolutionDir)Common\Interface\Interfaces;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Interface\Interfaces;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
       <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
@@ -210,6 +216,8 @@
     <Lib>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
       <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
+      <AdditionalDependencies>Toolkit.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

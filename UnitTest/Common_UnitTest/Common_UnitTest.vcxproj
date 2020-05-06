@@ -85,18 +85,20 @@
     <EnableManagedIncrementalBuild>true</EnableManagedIncrementalBuild>
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)</IntDir>
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <EnableManagedIncrementalBuild>true</EnableManagedIncrementalBuild>
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)</IntDir>
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;$(SolutionDir)Common\Toolkit;$(SolutionDir)Common\Entities;$(SolutionDir)Common\Interface;$(SolutionDir)Common\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Entities;$(SolutionDir)Common\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -104,7 +106,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;$(SolutionDir)Build\bin_d;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin_d;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Toolkit.lib;Interface.lib;Common.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <BuildLog>
@@ -116,7 +118,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;$(SolutionDir)Common\Toolkit;$(SolutionDir)Common\Entities;$(SolutionDir)Common\Interface;$(SolutionDir)Common\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Entities;$(SolutionDir)Common\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -124,7 +126,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;$(SolutionDir)Build\bin_d;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin_d;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Toolkit.lib;Interface.lib;Common.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <BuildLog>
@@ -138,7 +140,7 @@
       <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;$(SolutionDir)Common\Toolkit;$(SolutionDir)Common\Entities;$(SolutionDir)Common\Interface;$(SolutionDir)Common\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Entities;$(SolutionDir)Common\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
       <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -148,7 +150,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;$(SolutionDir)Build\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Toolkit.lib;Interface.lib;Common.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <BuildLog>
@@ -162,7 +164,7 @@
       <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;$(SolutionDir)Common\Toolkit;$(SolutionDir)Common\Entities;$(SolutionDir)Common\Interface;$(SolutionDir)Common\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Entities;$(SolutionDir)Common\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
       <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -172,7 +174,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;$(SolutionDir)Build\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Toolkit.lib;Interface.lib;Common.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <BuildLog>

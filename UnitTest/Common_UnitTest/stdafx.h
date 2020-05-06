@@ -10,8 +10,6 @@
 // Headers for CppUnitTest
 #include "CppUnitTest.h"
 
-#include "Toolkit.h"
+#include "Tool/Toolkit.h"
 
 #include <tchar.h>
-
-#include "Entities/CollectRecord/CollectRecordEntity.h"
