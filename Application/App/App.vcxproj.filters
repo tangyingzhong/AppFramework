@@ -2,29 +2,29 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Application">
-      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
-      <Extensions>ui</Extensions>
+      <UniqueIdentifier>{f4ec8976-a29e-45e2-a3a2-b41d20c8f382}</UniqueIdentifier>
     </Filter>
     <Filter Include="Model">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <UniqueIdentifier>{eff37a87-bb69-4b01-8da9-d86935a02d43}</UniqueIdentifier>
     </Filter>
     <Filter Include="View">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <UniqueIdentifier>{c53d8b25-7316-4516-8147-9b0b8c4aeb76}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource">
-      <UniqueIdentifier>{64601205-16cd-44da-965d-854eafcb2447}</UniqueIdentifier>
+    <Filter Include="Common">
+      <UniqueIdentifier>{c3479098-116b-4c01-8d84-4401e379ec39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Resource">
+      <UniqueIdentifier>{84d62fdc-ea09-41fa-8cd8-35f7473dbf46}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\App.cpp">
       <Filter>Application</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Program.cpp">
+    <ClCompile Include="Application\PreCompile.cpp">
       <Filter>Application</Filter>
     </ClCompile>
-    <ClCompile Include="Application\PreCompile.cpp">
+    <ClCompile Include="Application\Program.cpp">
       <Filter>Application</Filter>
     </ClCompile>
   </ItemGroup>
