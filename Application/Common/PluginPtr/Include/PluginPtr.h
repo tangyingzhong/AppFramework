@@ -12,7 +12,7 @@
 #ifndef PLUGINPTR_H
 #define PLUGINPTR_H
 
-#include "Common/IApplicationContext.h"
+#include "Model/Core/IApplicationContext.h"
 #include "AppFramework.h"
 
 template <class T>
@@ -22,10 +22,12 @@ public:
 	typedef T ValueType;
 	typedef ValueType* Pointer;
 	typedef ValueType& Reference;
+	typedef IApplicationContext* AppContext;
 
 public:
 	// Construct the plugin pointer
-	PluginPtr() :m_pPointer(NULL), 
+	PluginPtr() :
+		m_pPointer(NULL), 
 		m_strPluginName(_T("")),
 		m_iMajorVersion(0),
 		m_iMinorVersion(0),
@@ -40,7 +42,8 @@ public:
 	PluginPtr(String strPluginName,
 		Int32 iMajorVersion,
 		Int32 iMinorVersion,
-		Int32 iModifyVersion) :m_pPointer(NULL), 
+		Int32 iModifyVersion) :
+		m_pPointer(NULL), 
 		m_strPluginName(strPluginName),
 		m_iMajorVersion(iMajorVersion),
 		m_iMinorVersion(iMinorVersion),
@@ -242,13 +245,13 @@ private:
 	}
 
 	// Get the AppContext
-	inline IApplicationContext* GetAppContext() const
+	inline AppContext GetAppContext() const
 	{
 		return m_pAppContext;
 	}
 
 	// Set the AppContext
-	inline None SetAppContext(IApplicationContext* pAppContext)
+	inline None SetAppContext(AppContext pAppContext)
 	{
 		m_pAppContext = pAppContext;
 	}
@@ -318,7 +321,7 @@ private:
 	Int32 m_iModifyVersion;
 
 	// Application context
-	IApplicationContext* m_pAppContext;
+	AppContext m_pAppContext;
 	
 	// Disposed status
 	Boolean m_bDisposed;

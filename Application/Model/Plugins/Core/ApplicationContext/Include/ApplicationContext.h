@@ -11,8 +11,8 @@
 #ifndef APPLICATIONCONTEXT_H
 #define APPLICATIONCONTEXT_H
 
-#include "Common/IApplicationContext.h"
-#include "Common/IMicroCore.h"
+#include "Model/Core//IApplicationContext.h"
+#include "Model/Core//IMicroCore.h"
 #include "PluginLoader.h"
 
 class ApplicationContext :public PluginBase<IApplicationContext>

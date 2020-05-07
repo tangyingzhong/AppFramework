@@ -11,7 +11,7 @@
 #ifndef PLUGINMANAGER_H
 #define PLUGINMANAGER_H
 
-#include "Common/IPluginManager.h"
+#include "Model/Core/IPluginManager.h"
 #include "PluginLoader.h"
 
 class PluginManager :public PluginBase<IPluginManager>

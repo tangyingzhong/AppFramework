@@ -11,7 +11,7 @@
 #ifndef APPFRAMEWORK_H
 #define APPFRAMEWORK_H
 
-#include "Common/IApplicationContext.h"
+#include "Model/Core/IApplicationContext.h"
 #include "../../../Common/PluginLoader/Include/PluginLoader.h"
 
 class AppFramework

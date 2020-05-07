@@ -11,7 +11,7 @@
 #ifndef	SYSTEM_APP_H
 #define SYSTEM_APP_H
 
-#include "Common/IApplicationContext.h"
+#include "Model/Core/IApplicationContext.h"
 #include "AppFramework.h"
 
 class App

@@ -102,9 +102,9 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginPtr\Include;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Plugins\Core\AppFramework\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Application\Common\Common\Include;$(SolutionDir)Application\Common\Interface\Interfaces;$(SolutionDir)Application\Common\PluginPtr\Include;$(SolutionDir)Application\Common\PluginLoader\Include;$(SolutionDir)Application\Model\Plugins\Core\AppFramework\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -120,9 +120,9 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginPtr\Include;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Plugins\Core\AppFramework\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Application\Common\Common\Include;$(SolutionDir)Application\Common\Interface\Interfaces;$(SolutionDir)Application\Common\PluginPtr\Include;$(SolutionDir)Application\Common\PluginLoader\Include;$(SolutionDir)Application\Model\Plugins\Core\AppFramework\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,8 +140,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginPtr\Include;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Plugins\Core\AppFramework\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ConformanceMode>false</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Application\Common\Common\Include;$(SolutionDir)Application\Common\Interface\Interfaces;$(SolutionDir)Application\Common\PluginPtr\Include;$(SolutionDir)Application\Common\PluginLoader\Include;$(SolutionDir)Application\Model\Plugins\Core\AppFramework\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -161,8 +161,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Common\Include;$(SolutionDir)Common\Interface\Interfaces;$(SolutionDir)Common\PluginPtr\Include;$(SolutionDir)Common\PluginLoader\Include;$(SolutionDir)Plugins\Core\AppFramework\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ConformanceMode>false</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Application\Common\Common\Include;$(SolutionDir)Application\Common\Interface\Interfaces;$(SolutionDir)Application\Common\PluginPtr\Include;$(SolutionDir)Application\Common\PluginLoader\Include;$(SolutionDir)Application\Model\Plugins\Core\AppFramework\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -11,7 +11,7 @@
 #ifndef LOCALDB_H
 #define LOCALDB_H
 
-#include "ILocalDB.h"
+#include "Model/Fundation/ILocalDB.h"
 #include "SqliteDB.h"
 
 using namespace System::DataBase;

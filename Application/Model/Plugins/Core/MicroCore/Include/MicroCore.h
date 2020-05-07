@@ -11,8 +11,8 @@
 #ifndef MICROCORE_H
 #define MICROCORE_H
 
-#include "Common/IMicroCore.h"
-#include "Common/IPluginManager.h"
+#include "Model/Core//IMicroCore.h"
+#include "Model/Core//IPluginManager.h"
 #include "PluginLoader.h"
 
 class MicroCore :public PluginBase<IMicroCore>

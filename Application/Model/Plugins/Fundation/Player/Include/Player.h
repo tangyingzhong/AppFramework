@@ -12,6 +12,7 @@
 #define PLAYER_H
 
 #include <thread>
+#include "Model/Fundation/IPlayer.h"
 
 class Player :public PluginBase<IPlayer>
 {

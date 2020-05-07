@@ -23,6 +23,4 @@
 
 #include "Common/PluginBase.h"
 
-#include "IPlayer.h"
-
 #endif // VOICEPLAYER_PRECOMPILE_H

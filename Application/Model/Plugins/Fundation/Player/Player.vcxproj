@@ -122,14 +122,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Interface\Interfaces</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Application\Common\Interface\Interfaces</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin_d</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Toolkit.lib;Interface.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Toolkit.lib;Interface.lib;Common.lib;PluginLoader.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\(MSBuildProjectName).log</Path>
@@ -145,14 +145,14 @@
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
       <CallingConvention>StdCall</CallingConvention>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Interface\Interfaces</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Application\Common\Interface\Interfaces</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MinimumRequiredVersion>5.02</MinimumRequiredVersion>
-      <AdditionalDependencies>Toolkit.lib;Interface.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Toolkit.lib;Interface.lib;Common.lib;PluginLoader.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin_d</AdditionalLibraryDirectories>
     </Link>
     <BuildLog>
@@ -171,7 +171,7 @@
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
       <CallingConvention>Cdecl</CallingConvention>
       <CompileAs>Default</CompileAs>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Interface\Interfaces</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Application\Common\Interface\Interfaces</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -180,7 +180,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Toolkit.lib;Interface.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Toolkit.lib;Interface.lib;Common.lib;PluginLoader.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\(MSBuildProjectName).log</Path>
@@ -198,7 +198,7 @@
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
       <CallingConvention>StdCall</CallingConvention>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Common\Interface\Interfaces</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Application\Common\Interface\Interfaces</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -206,7 +206,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MinimumRequiredVersion>5.02</MinimumRequiredVersion>
-      <AdditionalDependencies>Toolkit.lib;Interface.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Toolkit.lib;Interface.lib;Common.lib;PluginLoader.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin</AdditionalLibraryDirectories>
     </Link>
     <BuildLog>

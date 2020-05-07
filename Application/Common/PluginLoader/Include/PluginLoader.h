@@ -20,8 +20,9 @@ public:
 
 public:
 	// Construct the plugin Loader
-	PluginLoader():m_pConcretLoader(NULL),
-	m_bDisposed(false)
+	PluginLoader():
+		m_pConcretLoader(NULL),
+		m_bDisposed(false)
 	{	
 
 	}
