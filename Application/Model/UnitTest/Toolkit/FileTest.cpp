@@ -64,7 +64,7 @@ namespace Tool_UnitTest
 
 			Assert::IsTrue(FileHelper.Open(_T("D:\\SysConf16.json"), File::FileMode::CREATE));
 
-			Assert::IsTrue(FileHelper.Write(strData.c_str(), 0, strData.length()) != 0);
+			Assert::IsTrue(FileHelper.Write(strData.c_str(), 0, static_cast<File::ArraySize>(strData.length())) != 0);
 
 			FileHelper.Close();
 		}

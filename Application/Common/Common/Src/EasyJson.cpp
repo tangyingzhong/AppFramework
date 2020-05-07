@@ -75,7 +75,9 @@ Boolean EasyJson::Save(String& strObject, String strJsonFilePath)
 		return false;
 	}
 
-	FileHelper.Write((SByteArray)strObject.ToUTF8Data().c_str(), 0, strObject.ToUTF8Data().length());
+	FileHelper.Write((SByteArray)strObject.ToUTF8Data().c_str(), 
+		0, 
+		static_cast<File::ArraySize>(strObject.ToUTF8Data().length()));
 
 	FileHelper.Close();
 

@@ -148,7 +148,7 @@ namespace Tool_UnitTest
 				Assert::Fail(_T("Failed to create a file"));
 			}
 
-			FileHelper.Write((SByteArray)strProName.ToUTF8Data().c_str(), 0, strProName.ToUTF8Data().length());
+			FileHelper.Write((SByteArray)strProName.ToUTF8Data().c_str(), 0, static_cast<File::ArraySize>(strProName.ToUTF8Data().length()));
 
 			FileHelper.Close();
 		}
@@ -178,7 +178,7 @@ namespace Tool_UnitTest
 				Assert::Fail(_T("Failed to create a file"));
 			}
 
-			FileHelper.Write((SByteArray)strJson.ToUTF8Data().c_str(), 0, strJson.ToUTF8Data().length());
+			FileHelper.Write((SByteArray)strJson.ToUTF8Data().c_str(), 0, static_cast<File::ArraySize>(strJson.ToUTF8Data().length()));
 
 			FileHelper.Close();
 		}
