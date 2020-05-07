@@ -13,6 +13,24 @@
     <Filter Include="Entities">
       <UniqueIdentifier>{695925ba-b9ae-487a-984b-70cebb4a5da4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interfaces\Model">
+      <UniqueIdentifier>{4b4209f2-63c5-467f-9a8e-090fefb1d92f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\Presenter">
+      <UniqueIdentifier>{ff55a94e-bf10-408e-92cf-d7f015e9f572}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\View">
+      <UniqueIdentifier>{1fbf9990-baff-4e96-a28e-1507a2a58b83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\Model\Core">
+      <UniqueIdentifier>{47fbda4a-d8ac-4e67-a3ab-177a8eb8c040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\Model\Fundation">
+      <UniqueIdentifier>{da34895f-7c72-448d-9017-314a681959b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\Model\Business">
+      <UniqueIdentifier>{3b3ab9a4-01ac-4ec6-a249-af2eadd4125f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\dllmain.cpp">
@@ -53,11 +71,20 @@
     <ClInclude Include="Interfaces\Common\PluginBase.h">
       <Filter>Interfaces\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Interfaces\ILocalDB.h">
-      <Filter>Interfaces</Filter>
+    <ClInclude Include="Interfaces\Model\Core\IApplicationContext.h">
+      <Filter>Interfaces\Model\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Interfaces\IPlayer.h">
-      <Filter>Interfaces</Filter>
+    <ClInclude Include="Interfaces\Model\Core\IMicroCore.h">
+      <Filter>Interfaces\Model\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Model\Core\IPluginManager.h">
+      <Filter>Interfaces\Model\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Model\Fundation\ILocalDB.h">
+      <Filter>Interfaces\Model\Fundation</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Model\Fundation\IPlayer.h">
+      <Filter>Interfaces\Model\Fundation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
