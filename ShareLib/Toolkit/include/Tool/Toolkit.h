@@ -61,6 +61,9 @@
 #include "Tool/Thread/MutexLocker.h"
 #include "Tool/Thread/Process.h"
 #include "Tool/Thread/Semaphore.h"
+#include "Tool/ThreadPool/IThreadPool.h"
+#include "Tool/ThreadPool/ThreadPool.h"
+#include "Tool/Ini/Ini.h"
 #include "Tool/Timer/Counter.h"
 #include "Tool/Timer/Delay.h"
 #include "Tool/Timer/Timer.h"
@@ -76,7 +79,6 @@ using namespace System::Encoding;
 using namespace System::EventArgument;
 using namespace System::IO;
 using namespace System::Network;
-using namespace System::MultiMedia;
 using namespace System::Thread;
 
 #endif // TOOLKIT_H 
