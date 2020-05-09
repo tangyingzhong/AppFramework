@@ -1,12 +1,14 @@
 How to use it ?
 
-	1.you just need to download the project and compile it successfully.
+	1.You just need to download the project and compile it successfully for the whole solution.
 
-	2.you can add your personal tool to the ToolkitEx project like what we have.
+	2.You can add your personal tool under the Common directory as new static lib projects.
 
-	3.you should add your interface to the Interface project at first when you add a plugin project
+	3.You should add your plugin interface to the Interface project and then add your own plugin project.
 
-	4.you can export your plugin like we have now. And you can use plugin by PluginPtr<Interface> class
+	4.You can export your plugins like we do for our core plugins. 
+
+	5.You can use a plugin by using PluginPtr<Interface> wherever you need it.
 
 Note: 
 
