@@ -43,7 +43,7 @@ Boolean EasyJson::GetJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc)
 }
 
 // Set Json document
-Boolean EasyJson::SetJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc)
+Boolean EasyJson::FlushJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc)
 {
 	if (strJsonFilePath.IsEmpty())
 	{
@@ -75,7 +75,7 @@ Boolean EasyJson::Save(String& strObject, String strJsonFilePath)
 		return false;
 	}
 
-	FileHelper.Write((SByteArray)strObject.ToUTF8Data().c_str(), 
+	FileHelper.Write(const_cast<SByteArray>(strObject.ToUTF8Data().c_str()),
 		0, 
 		static_cast<File::ArraySize>(strObject.ToUTF8Data().length()));
 

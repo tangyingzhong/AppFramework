@@ -12,9 +12,9 @@
 #define APPFRAMEWORK_H
 
 #include "Model/Core/IApplicationContext.h"
-#include "../../../Common/PluginLoader/Include/PluginLoader.h"
+#include "PluginLoader.h"
 
-class AppFramework
+class CLASS_ITEM AppFramework
 {
 public:
 	typedef Mutex* Lock;

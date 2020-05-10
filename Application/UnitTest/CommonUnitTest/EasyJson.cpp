@@ -32,7 +32,7 @@ namespace Common_UnitTest
 
 			String strNewJsonFilePath = _T("D:\\NewSysConf.json");
 
-			Assert::IsTrue(EasyJson().SetJsonDoc(strNewJsonFilePath, JsonDoc));
+			Assert::IsTrue(EasyJson().FlushJsonDoc(strNewJsonFilePath, JsonDoc));
 		}
 	};
 }

@@ -11,7 +11,7 @@
 #ifndef EASYJSON_H
 #define EASYJSON_H
 
-class EasyJson
+class CLASS_ITEM EasyJson
 {
 public:
 	// Construct the EasyJson
@@ -32,7 +32,7 @@ public:
 	Boolean GetJsonDoc(String strJsonFilePath,JsonDocument& JsonDoc);
 
 	// Set Json document
-	Boolean SetJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc);
+	Boolean FlushJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc);
 
 private:
 	// Initialize the EasyJson
