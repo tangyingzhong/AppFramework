@@ -53,24 +53,6 @@
     <ClInclude Include="Application\Interface.h">
       <Filter>Application</Filter>
     </ClInclude>
-    <ClInclude Include="Interfaces\Common\IPlugin.h">
-      <Filter>Interfaces\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\Common\PluginGenerator.h">
-      <Filter>Interfaces\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\Common\IApplicationContext.h">
-      <Filter>Interfaces\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\Common\IMicroCore.h">
-      <Filter>Interfaces\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\Common\IPluginManager.h">
-      <Filter>Interfaces\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\Common\PluginBase.h">
-      <Filter>Interfaces\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Interfaces\Model\Core\IApplicationContext.h">
       <Filter>Interfaces\Model\Core</Filter>
     </ClInclude>
@@ -85,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="Interfaces\Model\Fundation\IPlayer.h">
       <Filter>Interfaces\Model\Fundation</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Common\IPlugin.h">
+      <Filter>Interfaces\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Common\PluginBase.h">
+      <Filter>Interfaces\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Common\PluginGenerator.h">
+      <Filter>Interfaces\Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

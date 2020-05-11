@@ -26,7 +26,7 @@ public:
 	MicroCore();
 
 	// Detructe the kernel
-	~MicroCore();
+	virtual ~MicroCore();
 
 private:
 	// Forbid the copy kernel

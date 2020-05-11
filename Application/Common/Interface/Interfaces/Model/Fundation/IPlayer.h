@@ -28,7 +28,7 @@ public:
 
 public:
 	// Virtual detructe the player
-	virtual ~IPlayer() {		}
+	virtual ~IPlayer() {	}
 
 public:
 	// Run the audio

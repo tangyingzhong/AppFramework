@@ -20,7 +20,7 @@ public:
 
 public:
 	// Virtual detructe the plugin
-	virtual ~IPlugin() {		}
+	virtual ~IPlugin() {	}
 
 public:
 	// Start the plugin

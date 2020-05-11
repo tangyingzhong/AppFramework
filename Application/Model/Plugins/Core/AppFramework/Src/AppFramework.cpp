@@ -35,8 +35,9 @@ None AppFramework::DestoryInstance()
 }
 
 // Construct the AppFramework
-AppFramework::AppFramework() :m_pAppContext(NULL),
-m_bDisposed(false)
+AppFramework::AppFramework() :
+	m_pAppContext(NULL),
+	m_bDisposed(false)
 {
 	Initialize();
 }
@@ -50,6 +51,9 @@ AppFramework::~AppFramework()
 // Initialize the AppFramework
 None AppFramework::Initialize()
 {
+	// Create plugin loader
+	CreatePluginLoader();
+
 	// Create app context
 	CreateAppContext();
 }
@@ -60,19 +64,58 @@ None AppFramework::Destory()
 	if (!GetDisposed())
 	{
 		SetDisposed(true);
+
+		// Destory app context
+		DestoryAppContext();
+
+		// Destory plugin loader
+		DestoryPluginLoader();
+	}
+}
+
+// Create plugin loader
+None AppFramework::CreatePluginLoader()
+{
+	SetPluginLoader(new PluginLoader<IApplicationContext>());
+}
+
+// Destory the plugin loader
+None AppFramework::DestoryPluginLoader()
+{
+	if (GetPluginLoader())
+	{
+		delete GetPluginLoader();
+
+		SetPluginLoader(NULL);
 	}
 }
 
 // Create app context
 None AppFramework::CreateAppContext()
 {
-	if (!m_PluginLoader.Load(APPLICATION_CONTEXT_NAME))
+	if (GetPluginLoader() == NULL)
+	{
+		SetAppContext(NULL);
+	}	
+
+	if (!GetPluginLoader()->Load(APPLICATION_CONTEXT_NAME))
 	{
 		SetAppContext(NULL);
 	}
 	else
 	{
-		SetAppContext(m_PluginLoader.Data());
+		SetAppContext(GetPluginLoader()->Data());
+	}
+}
+
+// Destory app context
+None AppFramework::DestoryAppContext()
+{
+	if (GetAppContext())
+	{
+		delete GetAppContext();
+
+		SetAppContext(NULL);
 	}
 }
 

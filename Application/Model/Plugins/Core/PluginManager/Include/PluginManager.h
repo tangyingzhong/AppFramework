@@ -27,7 +27,7 @@ public:
 	PluginManager();
 
 	// Detructe the engine
-	~PluginManager();
+	virtual ~PluginManager();
 
 private:
 	// Forbid the copy engine

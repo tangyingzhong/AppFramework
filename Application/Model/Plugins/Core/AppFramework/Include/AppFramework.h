@@ -18,7 +18,7 @@ class CLASS_ITEM AppFramework
 {
 public:
 	typedef Mutex* Lock;
-	typedef PluginLoader<IApplicationContext> Loader;
+	typedef PluginLoader<IApplicationContext>* Loader;
 
 public:
 	// Get the AppFramework instance
@@ -54,6 +54,15 @@ private:
 	// Create app context
 	None CreateAppContext();
 
+	// Destory app context
+	None DestoryAppContext();
+
+	// Create plugin loader
+	None CreatePluginLoader();
+
+	// Destory the plugin loader
+	None DestoryPluginLoader();
+
 private:
 	// Get the AppContext
 	inline IApplicationContext* GetAppContext() const
@@ -79,6 +88,18 @@ private:
 		m_bDisposed = bDisposed;
 	}
 
+	// Get the PluginLoader
+	inline Loader GetPluginLoader() const
+	{
+		return m_pPluginLoader;
+	}
+
+	// Set the PluginLoader
+	inline void SetPluginLoader(Loader pPluginLoader)
+	{
+		m_pPluginLoader = pPluginLoader;
+	}
+
 private:
 	// AppFramework self
 	static AppFramework* m_pInstance;
@@ -90,7 +111,7 @@ private:
 	IApplicationContext* m_pAppContext;
 
 	// Plugin loader
-	Loader m_PluginLoader;
+	Loader m_pPluginLoader;
 
 	// AppFramework close state
 	BOOL m_bDisposed;

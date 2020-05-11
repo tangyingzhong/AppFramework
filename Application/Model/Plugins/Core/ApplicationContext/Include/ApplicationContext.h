@@ -28,7 +28,7 @@ public:
 	ApplicationContext();
 
 	// Destory the context
-	~ApplicationContext();
+	virtual ~ApplicationContext();
 
 private:
 	// Forbid the context's copy

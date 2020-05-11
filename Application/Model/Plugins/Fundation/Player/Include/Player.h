@@ -21,7 +21,7 @@ public:
 	Player();
 
 	// Destory the player
-	~Player();
+	virtual ~Player();
 
 private:
 	// Forbid the player's copy

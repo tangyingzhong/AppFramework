@@ -34,10 +34,7 @@
     <ClInclude Include="Application\Interface.h" />
     <ClInclude Include="Application\PreCompile.h" />
     <ClInclude Include="Application\targetver.h" />
-    <ClInclude Include="Interfaces\Common\IApplicationContext.h" />
-    <ClInclude Include="Interfaces\Common\IMicroCore.h" />
     <ClInclude Include="Interfaces\Common\IPlugin.h" />
-    <ClInclude Include="Interfaces\Common\IPluginManager.h" />
     <ClInclude Include="Interfaces\Common\PluginBase.h" />
     <ClInclude Include="Interfaces\Common\PluginGenerator.h" />
     <ClInclude Include="Interfaces\Model\Core\IApplicationContext.h" />
