@@ -1,4 +1,5 @@
 #include "PreCompile.h"
+#include "EasyJson.h"
 #include "PluginManager.h"
 
 GENERATE_PLUGIN(PLUGIN_MANAGER_PLUGIN, PluginManager);
@@ -51,18 +52,39 @@ None PluginManager::InitPluginNameTable()
 		return;
 	}
 
-	JsonDocument JsonDoc = JsonDocument::FromJsonFile(GetPluginConfigureFilePath());
-	if (JsonDoc.IsNull())
+	JsonDocument JsonDoc;
+
+	if (!EasyJson().GetJsonDoc(GetPluginConfigureFilePath(),JsonDoc))
 	{
 		return;
 	}
 
-	JsonDocument JsonObj = JsonDoc.GetKeyValue(_T("Plugin"));
-	if (JsonObj.IsArray())
+	JsonDocument JsonPluginObject = JsonDoc.GetKeyValue(_T("Plugin"));
+
+	JsonDocument JsonCoreObject = JsonPluginObject.GetKeyValue(_T("Core"));
+	if (JsonCoreObject.IsArray())
 	{
-		for (Index iIndex=0; iIndex<(Index)JsonObj.Size();++iIndex)
+		for (Index iIndex = 0; iIndex < (Index)JsonCoreObject.Size(); ++iIndex)
 		{
-			GetPluginNameTable().push_back(JsonObj[iIndex].ToString());
+			GetPluginNameTable().push_back(JsonCoreObject[iIndex].ToString());
+		}
+	}
+
+	JsonDocument JsonFundationObject = JsonPluginObject.GetKeyValue(_T("Fundation"));
+	if (JsonFundationObject.IsArray())
+	{
+		for (Index iIndex = 0; iIndex < (Index)JsonFundationObject.Size(); ++iIndex)
+		{
+			GetPluginNameTable().push_back(JsonFundationObject[iIndex].ToString());
+		}
+	}
+
+	JsonDocument JsonBusinessObject = JsonPluginObject.GetKeyValue(_T("Business"));
+	if (JsonBusinessObject.IsArray())
+	{
+		for (Index iIndex = 0; iIndex < (Index)JsonBusinessObject.Size(); ++iIndex)
+		{
+			GetPluginNameTable().push_back(JsonBusinessObject[iIndex].ToString());
 		}
 	}
 }
