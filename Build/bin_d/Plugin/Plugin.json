@@ -1,15 +1,5 @@
 {
 	"Plugin": {
-		"Core": [
-			"PluginManager",
-			"MicroCore",
-			"ApplicationContext",
-			"AppFramework"
-		],
-		"Fundation": [
-			"LocalDB",
-			"Player"
-		],
 		"Business": [
 		]
 	}

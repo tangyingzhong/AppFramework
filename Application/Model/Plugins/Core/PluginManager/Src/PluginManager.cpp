@@ -61,24 +61,6 @@ None PluginManager::InitPluginNameTable()
 
 	JsonDocument JsonPluginObject = JsonDoc.GetKeyValue(_T("Plugin"));
 
-	JsonDocument JsonCoreObject = JsonPluginObject.GetKeyValue(_T("Core"));
-	if (JsonCoreObject.IsArray())
-	{
-		for (Index iIndex = 0; iIndex < (Index)JsonCoreObject.Size(); ++iIndex)
-		{
-			GetPluginNameTable().push_back(JsonCoreObject[iIndex].ToString());
-		}
-	}
-
-	JsonDocument JsonFundationObject = JsonPluginObject.GetKeyValue(_T("Fundation"));
-	if (JsonFundationObject.IsArray())
-	{
-		for (Index iIndex = 0; iIndex < (Index)JsonFundationObject.Size(); ++iIndex)
-		{
-			GetPluginNameTable().push_back(JsonFundationObject[iIndex].ToString());
-		}
-	}
-
 	JsonDocument JsonBusinessObject = JsonPluginObject.GetKeyValue(_T("Business"));
 	if (JsonBusinessObject.IsArray())
 	{
