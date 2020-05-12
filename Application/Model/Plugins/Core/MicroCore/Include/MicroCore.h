@@ -61,6 +61,15 @@ private:
 	// Create a plugin controller
 	None CreatePluginController();
 
+	// Destory the plugin controller
+	None DestoryPluginController();
+
+	// Start plugin controller
+	Boolean StartPluginController();
+
+	// Stop plugin controller
+	Boolean StopPluginController();
+
 private:
 	// Get the PluginController
 	inline PluginController GetPluginController() const

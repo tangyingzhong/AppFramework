@@ -20,7 +20,8 @@ MicroCore::~MicroCore()
 // Init the Kernel 
 None MicroCore::Initialize()
 {
-	
+	// Create a plugin controller
+	CreatePluginController();
 }
 
 // Destory the Kernel
@@ -29,6 +30,9 @@ None MicroCore::Destory()
 	if (!GetDisposed())
 	{
 		SetDisposed(true);
+
+		// Destory the plugin controller
+		DestoryPluginController();
 	}
 }
 
@@ -45,20 +49,16 @@ None MicroCore::CreatePluginController()
 	}
 }
 
-// Start the micro Kernel
-Boolean MicroCore::Start()
+// Destory the plugin controller
+None MicroCore::DestoryPluginController()
 {
-	LOG_DEBUG(_T("Startup the micro core"),_T(""));
 
-	// Create a plugin controller
-	CreatePluginController();
+}
 
-	// Start a thread pool engine
-
-	// Start an event engine
-
-	// Start the plugin manager
-	if (GetPluginController()==NULL)
+// Start plugin controller
+Boolean MicroCore::StartPluginController()
+{
+	if (GetPluginController() == NULL)
 	{
 		return false;
 	}
@@ -71,12 +71,9 @@ Boolean MicroCore::Start()
 	return true;
 }
 
-// Stop the micro Kernel
-Boolean MicroCore::Stop()
+// Stop plugin controller
+Boolean MicroCore::StopPluginController()
 {
-	LOG_DEBUG(_T("Shutdown the micro core"), _T(""));
-
-	// Stop the plugin center
 	if (GetPluginController() == NULL)
 	{
 		return false;
@@ -85,6 +82,40 @@ Boolean MicroCore::Stop()
 	if (!GetPluginController()->Stop())
 	{
 		return false;
+	}
+
+	return true;
+}
+
+// Start the micro Kernel
+Boolean MicroCore::Start()
+{
+	LOG_DEBUG_EX(_T("Startup the micro core"));
+
+	// Start a thread pool engine
+
+	// Start an event engine
+
+	// Start the plugin manager
+	if (!StartPluginController())
+	{
+		LOG_ERROR_EX(_T("Failed to start plugin controller"));
+
+		return false;
+	}
+
+	return true;
+}
+
+// Stop the micro Kernel
+Boolean MicroCore::Stop()
+{
+	LOG_DEBUG_EX(_T("Shutdown the micro core"));
+
+	// Stop the plugin center
+	if (!StopPluginController())
+	{
+		LOG_ERROR_EX(_T("Failed to stop plugin controller"));
 	}
 
 	// Stop the event engine
