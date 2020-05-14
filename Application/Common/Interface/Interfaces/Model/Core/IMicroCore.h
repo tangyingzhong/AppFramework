@@ -33,6 +33,9 @@ public:
 
 	// Release the plugin
 	virtual Boolean ReleasePlugin(IPlugin* pPlugin) = 0;
+
+	// Push the task to thread pool
+	virtual bool AutoRun(TaskEntry& Task) = 0;
 };
 
 #endif //IMICROCORE_H

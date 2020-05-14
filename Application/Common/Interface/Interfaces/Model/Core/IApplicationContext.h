@@ -32,13 +32,9 @@ public:
 
 	// Release the plugin
 	virtual Boolean ReleasePlugin(IPlugin* pPlugin) = 0;
-};
 
-// As gloabal function to get application context (Every plugin needs to implement it)
-template<class T>
-IApplicationContext* GetApplicationContext(T* pApp)
-{
-	return pApp->GetAppContext();
-}
+	// Asyn run the task
+	virtual bool AsynAutoRun(TaskEntry& Task) = 0;
+};
 
 #endif // IAPPLICATIONCONTEXT_H

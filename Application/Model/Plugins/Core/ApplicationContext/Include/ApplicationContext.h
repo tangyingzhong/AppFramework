@@ -53,6 +53,9 @@ public:
 	// Release the plugin
 	virtual Boolean ReleasePlugin(IPlugin* pPlugin);
 
+	// Asyn run the task
+	virtual bool AsynAutoRun(TaskEntry& Task);
+
 private:
 	// Init the context
 	None Initialize();

@@ -20,6 +20,7 @@ class MicroCore :public PluginBase<IMicroCore>
 public:
 	typedef IPluginManager* PluginController;
 	typedef PluginLoader<IPluginManager> Loader;
+	typedef IThreadPool* ThreadPooller;
 
 public:
 	// Construct the kernel
@@ -51,6 +52,9 @@ public:
 	// Release the plugin
 	virtual Boolean ReleasePlugin(IPlugin* pPlugin);
 
+	// Push the task to thread pool
+	virtual bool AutoRun(TaskEntry& Task);
+
 private:
 	// Init the kernel 
 	None Initialize();
@@ -69,6 +73,18 @@ private:
 
 	// Stop plugin controller
 	Boolean StopPluginController();
+
+	// Create thread pool
+	None CreateThreadPool();
+
+	// Destory the thread pool
+	None DestoryThreadPool();
+
+	// Start thread pool
+	None StartThreadPool();
+
+	// Stop thread pool
+	None StopThreadPool();
 
 private:
 	// Get the PluginController
@@ -95,6 +111,18 @@ private:
 		return m_bDisposed;
 	}
 
+	// Get the ThreadPool
+	inline ThreadPooller GetThreadPool() const
+	{
+		return m_pThreadPool;
+	}
+
+	// Set the ThreadPool
+	inline void SetThreadPool(ThreadPooller pThreadPool)
+	{
+		m_pThreadPool = pThreadPool;
+	}
+
 private:
 	// Plugin controller
 	PluginController m_pPluginController;
@@ -102,6 +130,9 @@ private:
 	// Plugin manager loader
 	Loader m_PluginManagerLoader;
 
+	// Thread pool
+	ThreadPooller m_pThreadPool;
+	
 	// Disposed status
 	Boolean m_bDisposed;
 };

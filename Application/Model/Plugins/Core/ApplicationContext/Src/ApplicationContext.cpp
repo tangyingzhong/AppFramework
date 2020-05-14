@@ -50,6 +50,17 @@ None ApplicationContext::CreateMicroCore()
 	}
 }
 
+// Asyn run the task
+bool ApplicationContext::AsynAutoRun(TaskEntry& Task)
+{
+	if (GetMicroCoreModule() == NULL)
+	{
+		return false;
+	}
+
+	return GetMicroCoreModule()->AutoRun(Task);
+}
+
 // Start the micro engine
 Boolean ApplicationContext::Start()
 {

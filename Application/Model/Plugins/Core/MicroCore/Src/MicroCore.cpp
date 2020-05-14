@@ -6,6 +6,7 @@ GENERATE_PLUGIN(MICRO_CORE_PLUGIN, MicroCore);
 // Construct the Kernel
 MicroCore::MicroCore() :
 	m_pPluginController(NULL),
+	m_pThreadPool(NULL),
 	m_bDisposed(false)
 {
 	Initialize();
@@ -20,6 +21,9 @@ MicroCore::~MicroCore()
 // Init the Kernel 
 None MicroCore::Initialize()
 {
+	// Create thread pool
+	CreateThreadPool();
+
 	// Create a plugin controller
 	CreatePluginController();
 }
@@ -33,6 +37,44 @@ None MicroCore::Destory()
 
 		// Destory the plugin controller
 		DestoryPluginController();
+
+		// Destory thread pool
+		DestoryThreadPool();
+	}
+}
+
+// Create thread pool
+None MicroCore::CreateThreadPool()
+{
+	SetThreadPool(new ThreadPool());
+}
+
+// Destory the thread pool
+None MicroCore::DestoryThreadPool()
+{
+	if (GetThreadPool())
+	{
+		delete GetThreadPool();
+
+		SetThreadPool(NULL);
+	}
+}
+
+// Start thread pool
+None MicroCore::StartThreadPool()
+{
+	if (GetThreadPool())
+	{
+		GetThreadPool()->Start();
+	}
+}
+
+// Stop thread pool
+None MicroCore::StopThreadPool()
+{
+	if (GetThreadPool())
+	{
+		GetThreadPool()->Stop(true);
 	}
 }
 
@@ -87,14 +129,24 @@ Boolean MicroCore::StopPluginController()
 	return true;
 }
 
+// Push the task to thread pool
+bool MicroCore::AutoRun(TaskEntry& Task)
+{
+	if (GetThreadPool())
+	{
+		return GetThreadPool()->AddTask(Task);
+	}
+
+	return false;
+}
+
 // Start the micro Kernel
 Boolean MicroCore::Start()
 {
 	LOG_DEBUG_EX(_T("Startup the micro core"));
 
 	// Start a thread pool engine
-
-	// Start an event engine
+	StartThreadPool();
 
 	// Start the plugin manager
 	if (!StartPluginController())
@@ -118,10 +170,9 @@ Boolean MicroCore::Stop()
 		LOG_ERROR_EX(_T("Failed to stop plugin controller"));
 	}
 
-	// Stop the event engine
-
 	// Stop the thread pool engine
-	
+	StopThreadPool();
+
 	return true;
 }
 
