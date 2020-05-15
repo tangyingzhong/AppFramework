@@ -56,6 +56,9 @@ None AppFramework::Initialize()
 
 	// Create app context
 	CreateAppContext();
+
+	// Start the app context
+	StartAppContext();
 }
 
 // Destory the AppFramework
@@ -65,11 +68,32 @@ None AppFramework::Destory()
 	{
 		SetDisposed(true);
 
+		// Stop the app context
+		StopAppContext();
+
 		// Destory app context
 		DestoryAppContext();
 
 		// Destory plugin loader
 		DestoryPluginLoader();
+	}
+}
+
+// Start app context
+None AppFramework::StartAppContext()
+{
+	if (GetAppContext())
+	{
+		GetAppContext()->Start();
+	}
+}
+
+// Stop the app context
+None AppFramework::StopAppContext()
+{
+	if (GetAppContext())
+	{
+		GetAppContext()->Stop();
 	}
 }
 
@@ -104,7 +128,9 @@ None AppFramework::CreateAppContext()
 	}
 	else
 	{
-		SetAppContext(GetPluginLoader()->Data());
+		IApplicationContext* pContext = (*m_pPluginLoader).Data();
+
+		SetAppContext(pContext);
 	}
 }
 

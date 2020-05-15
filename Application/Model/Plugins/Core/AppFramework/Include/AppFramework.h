@@ -63,6 +63,12 @@ private:
 	// Destory the plugin loader
 	None DestoryPluginLoader();
 
+	// Start app context
+	None StartAppContext();
+
+	// Stop the app context
+	None StopAppContext();
+
 private:
 	// Get the AppContext
 	inline IApplicationContext* GetAppContext() const

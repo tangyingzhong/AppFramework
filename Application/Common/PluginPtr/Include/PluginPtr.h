@@ -13,6 +13,7 @@
 #define PLUGINPTR_H
 
 #include "Model/Core/IApplicationContext.h"
+#include "PluginLoader.h"
 #include "AppFramework.h"
 
 template <class T>
@@ -32,7 +33,7 @@ public:
 		m_iMajorVersion(0),
 		m_iMinorVersion(0),
 		m_iModifyVersion(0),
-		m_pAppContext(AppFramework::GetInstance()->GetGlobalContext()),
+		m_pAppContext(NULL),
 		m_bDisposed(false)
 	{
 		Initialize();
@@ -48,7 +49,7 @@ public:
 		m_iMajorVersion(iMajorVersion),
 		m_iMinorVersion(iMinorVersion),
 		m_iModifyVersion(iModifyVersion),
-		m_pAppContext(AppFramework::GetInstance()->GetGlobalContext()),
+		m_pAppContext(NULL),
 		m_bDisposed(false)
 	{
 		Initialize();
@@ -181,6 +182,9 @@ private:
 	// Initialize the App
 	None Initialize()
 	{
+		// Load the app framework
+		LoadAppFramework();
+
 		// Get the plugin
 		GetPlugin();
 	}
@@ -194,6 +198,16 @@ private:
 		}
 	}
 
+	// Load the app framework 
+	Boolean LoadAppFramework()
+	{
+		AppFramework* pFramework = AppFramework::GetInstance();
+
+		SetAppContext(pFramework->GetGlobalContext());
+
+		return true;
+	}
+
 	// Get the plugin
 	Boolean GetPlugin()
 	{
@@ -204,14 +218,14 @@ private:
 			return false;
 		}
 
-		if (GetPluginName().IsNone())
+		if (GetPluginName().IsEmpty())
 		{
 			SetPointer(NULL);
 
 			return false;
 		}
 
-		SetPointer(dynamic_cast<Pointer>(GetAppContext()->GetPlugin(GetPluginName(),
+		SetPointer(static_cast<Pointer>(GetAppContext()->GetPlugin(GetPluginName(),
 			GetMajorVersion(),
 			GetMinorVersion(),
 			GetModifyVersion())));

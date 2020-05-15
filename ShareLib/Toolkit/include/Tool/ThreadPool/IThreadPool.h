@@ -51,15 +51,19 @@ namespace System
 			// Copy construct the task
 			TaskEntry(const TaskEntry& other)
 			{
-				SetIsExitPool(other.GetIsExitPool());
-
 				SetTaskId(other.GetTaskId());
+
+				SetIsDetached(other.GetIsDetached());
 
 				SetThreadId(other.GetThreadId());
 
 				SetUserFunc(other.GetUserFunc());
 
 				SetUserData(other.GetUserData());
+
+				SetExitPoolLock(other.GetExitPoolLock());
+
+				SetIsExitPool(other.GetIsExitPool());
 			}
 
 			// Assign the task
@@ -67,15 +71,19 @@ namespace System
 			{
 				if (this != &other)
 				{
-					SetIsExitPool(other.GetIsExitPool());
-
 					SetTaskId(other.GetTaskId());
+
+					SetIsDetached(other.GetIsDetached());
 
 					SetThreadId(other.GetThreadId());
 
 					SetUserFunc(other.GetUserFunc());
 
 					SetUserData(other.GetUserData());
+
+					SetExitPoolLock(other.GetExitPoolLock());
+
+					SetIsExitPool(other.GetIsExitPool());
 				}
 
 				return *this;
@@ -84,7 +92,7 @@ namespace System
 			// Get the IsExitPool
 			inline bool GetIsExitPool() const
 			{
-				std::lock_guard<std::mutex> Locker(*GetExitPoolLock());
+				std::lock_guard<std::mutex> Locker(*m_pExitPoolLock);
 
 				return m_bIsExitPool;
 			}
@@ -92,7 +100,7 @@ namespace System
 			// Set the IsExitPool
 			inline void SetIsExitPool(bool bIsExitPool)
 			{
-				std::lock_guard<std::mutex> Locker(*GetExitPoolLock());
+				std::lock_guard<std::mutex> Locker(*m_pExitPoolLock);
 
 				m_bIsExitPool = bIsExitPool;
 			}

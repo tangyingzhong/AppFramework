@@ -320,18 +320,16 @@ IPlugin* PluginManager::GetPlugin(String strPluginName,
 		return NULL;
 	}
 
-	if (m_PluginMapTable.empty())
+	if (!m_PluginMapTable.empty())
 	{
-		return NULL;
-	}
+		PluginMapTable::iterator ModuleIter = m_PluginMapTable.find(strPluginName.ToANSIData());
 
-	PluginMapTable::iterator ModuleIter = m_PluginMapTable.find(strPluginName.ToANSIData());
+		if (ModuleIter != m_PluginMapTable.end())
+		{
+			Loader pLoader = ModuleIter->second;
 
-	if (ModuleIter != m_PluginMapTable.end())
-	{
-		Loader pLoader = ModuleIter->second;
-
-		return pLoader->Data();
+			return pLoader->Data();
+		}
 	}
 
 	// Create the module

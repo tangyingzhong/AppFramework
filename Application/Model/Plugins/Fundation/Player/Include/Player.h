@@ -36,14 +36,14 @@ public:
 		AudioCallbackFunc pFunc = NULL,
 		void* pUserData = NULL);
 
-	// Close the player
-	virtual Boolean Close();
-
 	// Comtinue the playing
 	virtual Boolean Continue();
 
 	// Pause the player
 	virtual Boolean Pause();
+
+	// Stop the plugin
+	virtual Boolean Stop();
 
 private:
 	// Init the player
@@ -54,6 +54,9 @@ private:
 
 	// Playing call back
 	None PlayCallbackFunc();
+
+	// Close the player
+	Boolean Close();
 
 private:
 	// Get the AudioCallbackFunc

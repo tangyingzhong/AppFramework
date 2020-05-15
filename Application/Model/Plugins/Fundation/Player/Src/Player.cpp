@@ -4,9 +4,10 @@
 GENERATE_PLUGIN(PLAYER_PLUGIN, Player);
 
 // Construct the Player
-Player::Player() :m_pAudioCallbackFunc(NULL),
-m_bExitTask(false),
-m_bDisposed(false)
+Player::Player() :
+	m_pAudioCallbackFunc(NULL),
+	m_bExitTask(false),
+	m_bDisposed(false)
 {
 	Initialize();
 }
@@ -112,6 +113,12 @@ Boolean Player::Run(String strAudioFilePath,
 	m_WaitForCompleteThread = std::thread(&Player::PlayCallbackFunc, this);
 
 	return true;
+}
+
+// Stop the plugin
+Boolean Player::Stop()
+{
+	return Close();
 }
 
 // Close the player
