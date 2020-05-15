@@ -59,9 +59,9 @@ public:
 			return false;
 		}
 
-		String strModulePath = Directory::AddEnding(Directory::GetExcutableDirectory());
+		//String strModulePath = Directory::AddEnding(Directory::GetExcutableDirectory());
 
-		//String strModulePath = String(_T("D:\\TangYingZhong\\TANG_CODE_COLLECTION\\Framework\\Build\\bin_d\\"));
+		String strModulePath = String(_T("D:\\TangYingZhong\\TANG_CODE_COLLECTION\\Framework\\Build\\bin_d\\"));
 
 		if (strPluginName.IsContain(_T(".dll")))
 		{
