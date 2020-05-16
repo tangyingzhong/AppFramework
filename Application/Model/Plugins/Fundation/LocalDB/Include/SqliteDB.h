@@ -52,6 +52,9 @@ namespace System
 			// Is opened or not
 			Boolean IsOpen();
 
+			// Is existed table 
+			Boolean IsExistedTable(String strTableName);
+
 			// Excute the sql(serach sql)
 			Boolean ExecuteNonQuery(String strSql,Int32& iRetCode);
 

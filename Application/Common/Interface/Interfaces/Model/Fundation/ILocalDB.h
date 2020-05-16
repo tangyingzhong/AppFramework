@@ -37,31 +37,31 @@ public:
 
 public:
 	// Configure the db
-	virtual bool Configure(std::string strFilePath) = 0;
+	virtual bool Configure(String strFilePath) = 0;
 
 	// Is table existed
-	virtual bool IsExisted(std::string strTableName)=0;
+	virtual bool IsExisted(String strTableName)=0;
 
 	// Create table in db
-	virtual bool CreateTable(std::string strSql) = 0;
+	virtual bool CreateTable(String strSql) = 0;
 
 	// Add record to db
-	virtual bool AddRecord(std::string strSql) = 0;
+	virtual bool AddRecord(String strSql) = 0;
 
 	// Delete record from the db
-	virtual bool DeleteRecord(std::string strSql) = 0;
+	virtual bool DeleteRecord(String strSql) = 0;
 
 	// Update the record in db
-	virtual bool UpdateRecord(std::string strSql) = 0;
+	virtual bool UpdateRecord(String strSql) = 0;
 
 	// Search records from the db
-	virtual bool SearchRecord(std::string strSql, RecordTable& Table) = 0;
+	virtual bool SearchRecord(String strSql, RecordTable& Table) = 0;
 
 	// Get table's total count
-	virtual bool GetTotalCount(std::string strSql,int& iTotalCount) = 0;
+	virtual bool GetTotalCount(String strSql,int& iTotalCount) = 0;
 
 	// Get error message
-	virtual std::string GetErrorMsg() = 0;
+	virtual String GetErrorMsg() = 0;
 };
 
 #endif // IVOICELOCALDB_H

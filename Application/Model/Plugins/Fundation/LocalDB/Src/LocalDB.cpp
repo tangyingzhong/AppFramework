@@ -45,7 +45,7 @@ Boolean LocalDB::OpenDb()
 	{
 		if (GetDbFilePath().IsEmpty())
 		{
-			SetErrorMessage(String("Db file path is None!"));
+			SetErrorMessage("Db file path is empty, you have to configure local db at first !");
 
 			return false;
 		}
@@ -75,7 +75,7 @@ Boolean LocalDB::ExcuteSql(String strSql, Int32 iRetCode)
 {
 	if (strSql.IsEmpty())
 	{
-		SetErrorMessage(String("Sql is None!"));
+		SetErrorMessage("Sql is empty!");
 
 		return false;
 	}
@@ -98,9 +98,9 @@ Boolean LocalDB::ExcuteSql(String strSql, Int32 iRetCode)
 }
 
 // Configure the db
-bool LocalDB::Configure(std::string strFilePath)
+bool LocalDB::Configure(String strFilePath)
 {
-	if (strFilePath.empty())
+	if (strFilePath.IsEmpty())
 	{
 		SetErrorMessage(String("DB file path is None!"));
 
@@ -113,64 +113,60 @@ bool LocalDB::Configure(std::string strFilePath)
 }
 
 // Is table existed
-bool LocalDB::IsExisted(std::string strTableName)
+bool LocalDB::IsExisted(String strTableName)
 {
-	if (strTableName.empty())
+	if (strTableName.IsEmpty())
 	{
-		SetErrorMessage(String("Table name is None!"));
+		SetErrorMessage("Table name is empty!");
 
 		return false;
 	}
 
-	String strSql = String("SELECT * FROM sqlite_master WHERE type='table' and name = %s").Arg(strTableName);
-
-	Int32 iRetCode = 0;
-
-	if (!ExcuteSql(strSql, iRetCode))
+	// Open the db
+	if (!OpenDb())
 	{
 		return false;
 	}
 
-	if (iRetCode==SQLITE_DONE)
+	// Excute the sql
+	if (!m_DB.IsExistedTable(strTableName))
 	{
+		SetErrorMessage(m_DB.GetErrorMessage());
+
 		return false;
 	}
-	else if (iRetCode == SQLITE_ROW)
-	{
-		return true;
-	}
 
-	return false;
+	return true;
 }
 
 // Create table in db
-bool LocalDB::CreateTable(std::string strSql)
+bool LocalDB::CreateTable(String strSql)
 {
 	return ExcuteSql(strSql);
 }
 
 // Add record to db
-bool LocalDB::AddRecord(std::string strSql)
+bool LocalDB::AddRecord(String strSql)
 {
 	return ExcuteSql(strSql);
 }
 
 // Delete record from the db
-bool LocalDB::DeleteRecord(std::string strSql)
+bool LocalDB::DeleteRecord(String strSql)
 {
 	return ExcuteSql(strSql);
 }
 
 // Update the record in db
-bool LocalDB::UpdateRecord(std::string strSql)
+bool LocalDB::UpdateRecord(String strSql)
 {
 	return ExcuteSql(strSql);
 }
 
 // Search records from the db
-bool LocalDB::SearchRecord(std::string strSql, RecordTable& Table)
+bool LocalDB::SearchRecord(String strSql, RecordTable& Table)
 {
-	if (strSql.empty())
+	if (strSql.IsEmpty())
 	{
 		SetErrorMessage(String("Sql is None!"));
 
@@ -194,9 +190,9 @@ bool LocalDB::SearchRecord(std::string strSql, RecordTable& Table)
 }
 
 // Get table's total count
-bool LocalDB::GetTotalCount(std::string strSql, int& iTotalCount)
+bool LocalDB::GetTotalCount(String strSql, int& iTotalCount)
 {
-	if (strSql.empty())
+	if (strSql.IsEmpty())
 	{
 		SetErrorMessage(String("Sql is None!"));
 
@@ -227,7 +223,7 @@ bool LocalDB::GetTotalCount(std::string strSql, int& iTotalCount)
 }
 
 // Get error message
-std::string LocalDB::GetErrorMsg()
+String LocalDB::GetErrorMsg()
 {
 	return GetErrorMessage().ToANSIData();
 }

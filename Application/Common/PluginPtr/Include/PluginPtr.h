@@ -138,10 +138,8 @@ public:
 	// Get pointer data
 	Pointer Data()
 	{
-		if (GetPointer() == NULL)
+		if (!IsValid())
 		{
-			WARN_MESSAGEBOX(_T("Warning"), _T("Pointer==NULL"));
-
 			return NULL;
 		}
 
@@ -151,16 +149,21 @@ public:
 	// Is valid
 	Boolean IsValid()
 	{
-		return GetPointer() != NULL;
+		if (GetPointer() == NULL)
+		{
+			WARN_MESSAGEBOX(_T("Warning"), _T("You must set plugin version at first !"));
+
+			return false;
+		}
+
+		return true;
 	}
 
 	// Support ->
 	Pointer operator->()
 	{
-		if (GetPointer()==NULL)
+		if (!IsValid())
 		{
-			WARN_MESSAGEBOX(_T("Warning"), _T("Pointer==NULL"));
-
 			return NULL;
 		}
 	
@@ -170,9 +173,9 @@ public:
 	// Support *
 	Reference operator*()
 	{
-		if (GetPointer() == NULL)
+		if (!IsValid())
 		{
-			WARN_MESSAGEBOX(_T("Warning"), _T("Pointer==NULL"));
+			return NULL;
 		}
 
 		return *m_pPointer;

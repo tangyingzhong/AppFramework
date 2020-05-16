@@ -34,31 +34,31 @@ private:
 	
 public:
 	// Configure the db
-	virtual bool Configure(std::string strFilePath);
+	virtual bool Configure(String strFilePath);
 
 	// Is table existed
-	virtual bool IsExisted(std::string strTableName);
+	virtual bool IsExisted(String strTableName);
 
 	// Create table in db
-	virtual bool CreateTable(std::string strSql);
+	virtual bool CreateTable(String strSql);
 
 	// Add record to db
-	virtual bool AddRecord(std::string strSql);
+	virtual bool AddRecord(String strSql);
 
 	// Delete record from the db
-	virtual bool DeleteRecord(std::string strSql);
+	virtual bool DeleteRecord(String strSql);
 
 	// Update the record in db
-	virtual bool UpdateRecord(std::string strSql);
+	virtual bool UpdateRecord(String strSql);
 
 	// Search records from the db
-	virtual bool SearchRecord(std::string strSql, RecordTable& Table);
+	virtual bool SearchRecord(String strSql, RecordTable& Table);
 
 	// Get table's total count
-	virtual bool GetTotalCount(std::string strSql, int& iTotalCount);
+	virtual bool GetTotalCount(String strSql, int& iTotalCount);
 
 	// Get error message
-	virtual std::string GetErrorMsg();
+	virtual String GetErrorMsg();
 
 private:
 	// Initialize the LocalDB

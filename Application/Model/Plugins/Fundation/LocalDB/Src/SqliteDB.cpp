@@ -98,6 +98,38 @@ None SqliteDB::Close()
 	SetIsOpen(false);
 }
 
+// Is existed table 
+Boolean SqliteDB::IsExistedTable(String strTableName)
+{
+	if (strTableName.IsEmpty())
+	{
+		SetErrorMessage("Table name is empty!");
+
+		return false;
+	}
+
+	String strSql = String("SELECT * FROM sqlite_master WHERE type='table' and name = '%s'")
+		.Arg(strTableName);
+
+	Int32 iRetCode = 0;
+
+	if (!ExecuteNonQuery(strSql, iRetCode))
+	{
+		return false;
+	}
+
+	if (iRetCode == SQLITE_DONE)
+	{
+		return false;
+	}
+	else if (iRetCode == SQLITE_ROW)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 // Excute the command 
 Boolean SqliteDB::Excute(String strSql,Int32& iRetCode)
 {
