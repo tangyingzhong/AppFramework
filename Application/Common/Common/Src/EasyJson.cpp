@@ -71,33 +71,7 @@ Boolean EasyJson::SetJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc)
 		return false;
 	}
 
-	String strJson = JsonDoc.ToJson();
-
-	return Save(strJson, strJsonFilePath);
-}
-
-// Set the device reg to file
-Boolean EasyJson::Save(String strData, String strJsonFilePath)
-{
-	if (strJsonFilePath.IsEmpty() || strData.IsEmpty())
-	{
-		SetErrorText("Json file path is empty!");
-
-		return false;
-	}
-
-	File FileHelper;
-
-	if (!FileHelper.Open(strJsonFilePath, File::FileMode::CREATE, File::FileAccess::READWRITE))
-	{
-		return false;
-	}
-
-	FileHelper.Write(strData.ToUTF8Data().c_str(),0,strData.ToUTF8Data().length());
-
-	FileHelper.Close();
-
-	return true;
+	return JsonDoc.Flush(strJsonFilePath);
 }
 
 // Get error message

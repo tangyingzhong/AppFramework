@@ -11,7 +11,7 @@ namespace EasyJson_UnitTest
 	public:
 		TEST_METHOD(TestGetJsonDoc)
 		{
-			String strJsonFilePath = _T("D:\\System.json");
+			String strJsonFilePath = _T("D:\\System1.json");
 
 			JsonDocument JsonDoc;
 
@@ -22,7 +22,7 @@ namespace EasyJson_UnitTest
 
 		TEST_METHOD(TestSetJsonDoc1)
 		{
-			String strJsonFilePath = _T("D:\\System.json");
+			String strJsonFilePath = _T("D:\\System1.json");
 
 			JsonDocument JsonDoc;
 

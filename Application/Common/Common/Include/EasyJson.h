@@ -43,9 +43,6 @@ private:
 
 	// Destory the EasyJson
 	None Destory();
-	
-	// Set the object  string to file
-	Boolean Save(String strData, String strJsonFilePath);
 
 private:
 	// Get the disposed status
