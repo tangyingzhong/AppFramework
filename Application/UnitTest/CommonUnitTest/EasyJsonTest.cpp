@@ -4,14 +4,14 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace Common_UnitTest
+namespace EasyJson_UnitTest
 {
 	TEST_CLASS(EasyJsonTest)
 	{
 	public:
 		TEST_METHOD(TestGetJsonDoc)
 		{
-			String strJsonFilePath = _T("D:\\SysConf.json");
+			String strJsonFilePath = _T("D:\\System.json");
 
 			JsonDocument JsonDoc;
 
@@ -20,9 +20,9 @@ namespace Common_UnitTest
 			Assert::IsFalse(JsonDoc.IsNull());
 		}
 
-		TEST_METHOD(TestSetJsonDoc)
+		TEST_METHOD(TestSetJsonDoc1)
 		{
-			String strJsonFilePath = _T("D:\\SysConf.json");
+			String strJsonFilePath = _T("D:\\System.json");
 
 			JsonDocument JsonDoc;
 
@@ -30,9 +30,9 @@ namespace Common_UnitTest
 
 			Assert::IsFalse(JsonDoc.IsNull());
 
-			String strNewJsonFilePath = _T("D:\\NewSysConf.json");
+			String strNewJsonFilePath = _T("D:\\System231.json");
 
-			Assert::IsTrue(EasyJson().FlushJsonDoc(strNewJsonFilePath, JsonDoc));
+			Assert::IsTrue(EasyJson().SetJsonDoc(strNewJsonFilePath, JsonDoc));
 		}
 	};
 }

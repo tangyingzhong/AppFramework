@@ -32,7 +32,10 @@ public:
 	Boolean GetJsonDoc(String strJsonFilePath,JsonDocument& JsonDoc);
 
 	// Set Json document
-	Boolean FlushJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc);
+	Boolean SetJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc);
+
+	// Get error message
+	String GetErrorMsg();
 
 private:
 	// Initialize the EasyJson
@@ -42,7 +45,7 @@ private:
 	None Destory();
 	
 	// Set the object  string to file
-	Boolean Save(String& strObject, String strJsonFilePath);
+	Boolean Save(String strData, String strJsonFilePath);
 
 private:
 	// Get the disposed status
@@ -57,7 +60,22 @@ private:
 		m_bDisposed = bDisposed;
 	}
 
+	// Get the ErrorText
+	inline String GetErrorText() const
+	{
+		return *m_pstrErrorText;
+	}
+
+	// Set the ErrorText
+	inline void SetErrorText(String strErrorText)
+	{
+		*m_pstrErrorText = strErrorText;
+	}
+
 private:
+	// Error text
+	String* m_pstrErrorText;
+
 	// Disposed status
 	Boolean m_bDisposed;	
 };

@@ -3,6 +3,7 @@
 
 // Construct the EasyJson
 EasyJson::EasyJson() :
+	m_pstrErrorText(new String()),
 	m_bDisposed(false)
 {
 	Initialize();
@@ -34,24 +35,39 @@ Boolean EasyJson::GetJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc)
 {
 	if (strJsonFilePath.IsEmpty())
 	{
+		SetErrorText("Json file path is empty!");
+
 		return false;
 	}
 
-	JsonDoc = JsonDocument::FromJsonFile(strJsonFilePath);
+	String strErrorText;
+
+	JsonDoc = JsonDocument::FromJsonFile(strJsonFilePath, strErrorText);
+
+	if (JsonDoc.IsNull())
+	{
+		SetErrorText(JsonDoc.GetErrorMsg());
+
+		return false;
+	}
 
 	return true;
 }
 
 // Set Json document
-Boolean EasyJson::FlushJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc)
+Boolean EasyJson::SetJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc)
 {
 	if (strJsonFilePath.IsEmpty())
 	{
+		SetErrorText("Json file path is empty!");
+
 		return false;
 	}
 
 	if (JsonDoc.IsNull())
 	{
+		SetErrorText(JsonDoc.GetErrorMsg());
+
 		return false;
 	}
 
@@ -61,10 +77,12 @@ Boolean EasyJson::FlushJsonDoc(String strJsonFilePath, JsonDocument& JsonDoc)
 }
 
 // Set the device reg to file
-Boolean EasyJson::Save(String& strObject, String strJsonFilePath)
+Boolean EasyJson::Save(String strData, String strJsonFilePath)
 {
-	if (strJsonFilePath.IsEmpty() || strObject.IsEmpty())
+	if (strJsonFilePath.IsEmpty() || strData.IsEmpty())
 	{
+		SetErrorText("Json file path is empty!");
+
 		return false;
 	}
 
@@ -75,11 +93,15 @@ Boolean EasyJson::Save(String& strObject, String strJsonFilePath)
 		return false;
 	}
 
-	FileHelper.Write(const_cast<SByteArray>(strObject.ToUTF8Data().c_str()),
-		0, 
-		static_cast<File::ArraySize>(strObject.ToUTF8Data().length()));
+	FileHelper.Write(strData.ToUTF8Data().c_str(),0,strData.ToUTF8Data().length());
 
 	FileHelper.Close();
 
 	return true;
+}
+
+// Get error message
+String EasyJson::GetErrorMsg()
+{
+	return GetErrorText();
 }

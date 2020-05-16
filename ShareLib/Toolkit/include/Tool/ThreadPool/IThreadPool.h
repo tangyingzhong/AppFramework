@@ -51,19 +51,15 @@ namespace System
 			// Copy construct the task
 			TaskEntry(const TaskEntry& other)
 			{
-				SetTaskId(other.GetTaskId());
+				SetIsExitPool(other.GetIsExitPool());
 
-				SetIsDetached(other.GetIsDetached());
+				SetTaskId(other.GetTaskId());
 
 				SetThreadId(other.GetThreadId());
 
 				SetUserFunc(other.GetUserFunc());
 
 				SetUserData(other.GetUserData());
-
-				SetExitPoolLock(other.GetExitPoolLock());
-
-				SetIsExitPool(other.GetIsExitPool());
 			}
 
 			// Assign the task
@@ -71,19 +67,15 @@ namespace System
 			{
 				if (this != &other)
 				{
-					SetTaskId(other.GetTaskId());
+					SetIsExitPool(other.GetIsExitPool());
 
-					SetIsDetached(other.GetIsDetached());
+					SetTaskId(other.GetTaskId());
 
 					SetThreadId(other.GetThreadId());
 
 					SetUserFunc(other.GetUserFunc());
 
 					SetUserData(other.GetUserData());
-
-					SetExitPoolLock(other.GetExitPoolLock());
-
-					SetIsExitPool(other.GetIsExitPool());
 				}
 
 				return *this;
@@ -92,7 +84,7 @@ namespace System
 			// Get the IsExitPool
 			inline bool GetIsExitPool() const
 			{
-				std::lock_guard<std::mutex> Locker(*m_pExitPoolLock);
+				std::lock_guard<std::mutex> Locker(*GetExitPoolLock());
 
 				return m_bIsExitPool;
 			}
@@ -100,7 +92,7 @@ namespace System
 			// Set the IsExitPool
 			inline void SetIsExitPool(bool bIsExitPool)
 			{
-				std::lock_guard<std::mutex> Locker(*m_pExitPoolLock);
+				std::lock_guard<std::mutex> Locker(*GetExitPoolLock());
 
 				m_bIsExitPool = bIsExitPool;
 			}
