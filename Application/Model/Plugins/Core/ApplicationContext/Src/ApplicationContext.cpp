@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "ApplicationContext.h"
 
-GENERATE_PLUGIN(APPLICATION_CONTEXT_PLUGIN, ApplicationContext);
+GENERATE_PLUGIN(APP_CONTEXT_PLUGIN, ApplicationContext);
 
 // Construct the context
 ApplicationContext::ApplicationContext() :

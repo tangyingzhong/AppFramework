@@ -13,9 +13,9 @@
 
 #include "Common/PluginGenerator.h"
 
-#define APPLICATION_CONTEXT_NAME _T("ApplicationContext")
-#define APPLICATION_CONTEXT_VERSION 1,0,0
-#define APPLICATION_CONTEXT_PLUGIN APPLICATION_CONTEXT_NAME,APPLICATION_CONTEXT_VERSION
+#define APP_CONTEXT_NAME _T("ApplicationContext")
+#define APP_CONTEXT_VERSION 1,0,0
+#define APP_CONTEXT_PLUGIN APP_CONTEXT_NAME,APP_CONTEXT_VERSION
 
 class IApplicationContext :public IPlugin
 {

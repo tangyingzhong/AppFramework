@@ -151,8 +151,6 @@ public:
 	{
 		if (GetPointer() == NULL)
 		{
-			WARN_MESSAGEBOX(_T("Warning"), _T("You must set plugin version at first !"));
-
 			return false;
 		}
 
@@ -205,8 +203,17 @@ private:
 	Boolean LoadAppFramework()
 	{
 		AppFramework* pFramework = AppFramework::GetInstance();
+		if (pFramework==NULL)
+		{
+			return false;
+		}
 
 		SetAppContext(pFramework->GetGlobalContext());
+
+		if (GetAppContext() == NULL)
+		{
+			return false;
+		}
 
 		return true;
 	}

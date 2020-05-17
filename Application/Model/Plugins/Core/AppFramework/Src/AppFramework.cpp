@@ -57,7 +57,7 @@ None AppFramework::Initialize()
 	// Create app context
 	CreateAppContext();
 
-	// Start the app context
+	// Start the context
 	StartAppContext();
 }
 
@@ -68,7 +68,7 @@ None AppFramework::Destory()
 	{
 		SetDisposed(true);
 
-		// Stop the app context
+		// Stop the context
 		StopAppContext();
 
 		// Destory app context
@@ -126,7 +126,7 @@ None AppFramework::CreateAppContext()
 
 	if (!GetPluginLoader()->IsValid())
 	{
-		GetPluginLoader()->Load(APPLICATION_CONTEXT_NAME);
+		GetPluginLoader()->Load(APP_CONTEXT_NAME);
 
 		if (GetPluginLoader()->IsValid())
 		{
