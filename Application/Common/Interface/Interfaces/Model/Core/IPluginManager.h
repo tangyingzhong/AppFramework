@@ -16,6 +16,7 @@
 #define PLUGIN_MANAGER_NAME _T("PluginManager")
 #define PLUGIN_MANAGER__VERSION 1,0,0
 #define PLUGIN_MANAGER_PLUGIN PLUGIN_MANAGER_NAME,PLUGIN_MANAGER__VERSION
+#define PLUGIN_FILENAME _T("Plugin\\Plugin.json")
 
 class IPluginManager :public IPlugin
 {

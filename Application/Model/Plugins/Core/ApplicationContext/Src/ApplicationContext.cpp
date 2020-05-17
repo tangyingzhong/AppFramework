@@ -20,7 +20,8 @@ ApplicationContext::~ApplicationContext()
 // Init the context
 None ApplicationContext::Initialize()
 {
-	
+	// Create micro core
+	CreateMicroCore();
 }
 
 // Destory the context
@@ -29,6 +30,9 @@ None ApplicationContext::Destory()
 	if (!GetDisposed())
 	{
 		SetDisposed(true);
+
+		// Destory the micro core
+		DestoryMicroCore();
 	}
 }
 
@@ -50,24 +54,41 @@ None ApplicationContext::CreateMicroCore()
 	}
 }
 
-// Asyn run the task
-bool ApplicationContext::AsynAutoRun(TaskEntry& Task)
+// Destory the micro core
+None ApplicationContext::DestoryMicroCore()
 {
-	if (GetMicroCoreModule() == NULL)
+	if (GetMicroCoreModule())
 	{
+		delete GetMicroCoreModule();
+
+		SetMicroCoreModule(NULL);
+	}
+}
+
+// Excute the task
+bool ApplicationContext::Excute(TaskEntry* pTask)
+{
+	if (pTask == NULL)
+	{
+		LOG_ERROR_EX("Task is invalid !");
+
 		return false;
 	}
 
-	return GetMicroCoreModule()->AutoRun(Task);
+	if (GetMicroCoreModule() == NULL)
+	{
+		LOG_ERROR_EX("Micro core hasn't been created !");
+
+		return false;
+	}
+
+	return GetMicroCoreModule()->AutoRun(pTask);
 }
 
 // Start the micro engine
 Boolean ApplicationContext::Start()
 {
-	LOG_DEBUG(_T("Startup the app context"), _T(""));
-
-	// Create micro core
-	CreateMicroCore();
+	LOG_DEBUG_EX("App context is establishing ......");
 
 	if (GetMicroCoreModule()==NULL)
 	{
@@ -81,15 +102,15 @@ Boolean ApplicationContext::Start()
 // Stop the micro engine
 Boolean ApplicationContext::Stop()
 {
-	LOG_DEBUG(_T("Shutdown the application's context"), _T(""));
-
-	if (GetMicroCoreModule() == NULL)
-	{
-		return false;
-	}
+	LOG_DEBUG_EX("App context is destroying ......");
 
 	// Stop the micro core
-	return GetMicroCoreModule()->Stop();
+	if (GetMicroCoreModule())
+	{
+		GetMicroCoreModule()->Stop();
+	}
+
+	return true;
 }
 
 // Get the module by name and version

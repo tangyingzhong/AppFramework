@@ -104,15 +104,15 @@ private:
 
 private:
 	// Get the PluginConfigureFilePath
-	inline String GetPluginConfigureFilePath() const
+	inline String GetPluginFilePath() const
 	{
-		return m_strPluginConfigureFilePath;
+		return m_strPluginFilePath;
 	}
 
 	// Set the PluginConfigureFilePath
-	inline None SetPluginConfigureFilePath(String strFiilePath)
+	inline None SetPluginFilePath(String strFiilePath)
 	{
-		m_strPluginConfigureFilePath = strFiilePath;
+		m_strPluginFilePath = strFiilePath;
 	}
 
 	// Get the plugin name table
@@ -141,7 +141,7 @@ private:
 
 private:
 	// Plugin configure file path
-	String m_strPluginConfigureFilePath;
+	String m_strPluginFilePath;
 
 	// Plugin name table
 	PluginNameTable m_PluginNameTable;

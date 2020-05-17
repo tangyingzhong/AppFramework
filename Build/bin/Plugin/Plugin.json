@@ -1,6 +1,14 @@
 {
 	"Plugin": {
+		"Core": {
+			"ThreadPoolSize": 8
+			},
+		"Fundation": [
+			"LocalDB",
+			"Player"
+		],
 		"Business": [
 		]
 	}
 }
+

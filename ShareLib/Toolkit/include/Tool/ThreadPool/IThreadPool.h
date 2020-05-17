@@ -21,18 +21,20 @@ namespace System
 		class TaskEntry
 		{
 		public:
+			// Please remember to call GetIsExitPool() to know when we need to exit in your callback function
 			typedef void(*TaskCallbackFunc)(TaskEntry* pTask);
 
 		public:
 			// Contruct the task
 			TaskEntry():
 				m_iTaskId(0),
+				m_strTaskName("Task"),
 				m_bIsDetached(false),
 				m_iThreadId(0),
 				m_pUserFunc(NULL),
 				m_pUserData(NULL),
 				m_pExitPoolLock(NULL),
-				m_bIsExitPool(false)				
+				m_bIsExitPool(false)
 			{
 				SetExitPoolLock(new std::mutex());
 			}
@@ -51,15 +53,21 @@ namespace System
 			// Copy construct the task
 			TaskEntry(const TaskEntry& other)
 			{
-				SetIsExitPool(other.GetIsExitPool());
-
 				SetTaskId(other.GetTaskId());
+
+				SetTaskName(other.GetTaskName());
+
+				SetIsDetached(other.GetIsDetached());
 
 				SetThreadId(other.GetThreadId());
 
 				SetUserFunc(other.GetUserFunc());
 
 				SetUserData(other.GetUserData());
+
+				SetExitPoolLock(other.GetExitPoolLock());
+
+				SetIsExitPool(other.GetIsExitPool());
 			}
 
 			// Assign the task
@@ -67,34 +75,52 @@ namespace System
 			{
 				if (this != &other)
 				{
-					SetIsExitPool(other.GetIsExitPool());
-
 					SetTaskId(other.GetTaskId());
+
+					SetTaskName(other.GetTaskName());
+
+					SetIsDetached(other.GetIsDetached());
 
 					SetThreadId(other.GetThreadId());
 
 					SetUserFunc(other.GetUserFunc());
 
 					SetUserData(other.GetUserData());
+
+					SetExitPoolLock(other.GetExitPoolLock());
+
+					SetIsExitPool(other.GetIsExitPool());
 				}
 
 				return *this;
 			}
 
+			// Is empty
+			bool IsEmpty()
+			{
+				return GetUserFunc() == NULL;
+			}
+
 			// Get the IsExitPool
 			inline bool GetIsExitPool() const
 			{
-				std::lock_guard<std::mutex> Locker(*GetExitPoolLock());
+				m_pExitPoolLock->lock();
 
-				return m_bIsExitPool;
+				bool bRet = m_bIsExitPool;
+
+				m_pExitPoolLock->unlock();
+
+				return bRet;
 			}
 
 			// Set the IsExitPool
 			inline void SetIsExitPool(bool bIsExitPool)
 			{
-				std::lock_guard<std::mutex> Locker(*GetExitPoolLock());
+				m_pExitPoolLock->lock();
 
 				m_bIsExitPool = bIsExitPool;
+
+				m_pExitPoolLock->unlock();
 			}
 
 			// Get the TaskId
@@ -157,7 +183,18 @@ namespace System
 				m_bIsDetached = bIsDetached;
 			}
 
-		private:
+			// Get the TaskName
+			inline std::string GetTaskName() const
+			{
+				return m_strTaskName;
+			}
+
+			// Set the TaskName
+			inline void SetTaskName(std::string strTaskName)
+			{
+				m_strTaskName = strTaskName;
+			}
+
 			// Get the ExitPoolLock
 			inline std::mutex* GetExitPoolLock() const
 			{
@@ -174,6 +211,9 @@ namespace System
 			// Task id
 			int m_iTaskId;
 			
+			// Task name
+			std::string m_strTaskName;
+		
 			// Is detach the task
 			bool m_bIsDetached;
 			
@@ -209,7 +249,7 @@ namespace System
 			virtual int Stop(bool bForce = false) = 0;
 
 			// Add Task to pool
-			virtual bool AddTask(TaskEntry& task) = 0;
+			virtual bool AddTask(TaskEntry* pTask) = 0;
 
 			// Get error message
 			virtual std::string GetErrorMsg() = 0;

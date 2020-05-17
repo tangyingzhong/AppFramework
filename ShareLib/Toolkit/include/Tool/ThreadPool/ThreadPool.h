@@ -47,7 +47,7 @@ namespace System
 			virtual int Stop(bool bForce = false);
 
 			// Add Task to pool
-			virtual bool AddTask(TaskEntry& task);
+			virtual bool AddTask(TaskEntry* pTask);
 
 			// Transfer thread to container
 			virtual bool Transfer(MyThread* pThread);
@@ -69,7 +69,7 @@ namespace System
 			void DestoryBusyContainer();
 
 			// Get a task
-			bool GetOneTask(TaskEntry& task);
+			TaskEntry* GetOneTask();
 
 			// Get an idel thread
 			MyThread* GetAnIdelThread();
@@ -84,13 +84,16 @@ namespace System
 			bool AddToIdelContainer(MyThread* pThread);
 
 			// Start thread
-			bool StartTaskThread(MyThread* pThread, TaskEntry& Task);
+			bool StartTaskThread(MyThread* pThread, TaskEntry* pTask);
 
 			// Get thread id
 			unsigned long long GetThreadId();
 
 			// Wait for busy threads' exit
 			bool IsAllBusyThreadsExited();
+
+			// Is all idel threads ready
+			bool IsAllIdelThreadsReady();
 
 			// Force to exit all busy threads
 			void ForceExitAllBusyThreads();
@@ -157,26 +160,34 @@ namespace System
 			}
 
 			// Get the ForceStop
-			inline bool GetForceStop() const
+			inline bool GetForceStop()
 			{
+				std::lock_guard<std::mutex> Locker(m_ForceStopLock);
+
 				return m_bForceStop;
 			}
 
 			// Set the ForceStop
 			inline void SetForceStop(bool bForceStop)
 			{
+				std::lock_guard<std::mutex> Locker(m_ForceStopLock);
+
 				m_bForceStop = bForceStop;
 			}
 
 			// Get the StopPool
-			inline bool GetStopPool() const
+			inline bool GetStopPool()
 			{
+				std::lock_guard<std::mutex> Locker(m_StopLock);
+
 				return m_bStopPool;
 			}
 
 			// Set the StopPool
 			inline void SetStopPool(bool bStopPool)
 			{
+				std::lock_guard<std::mutex> Locker(m_StopLock);
+
 				m_bStopPool = bStopPool;
 			}
 
@@ -190,6 +201,22 @@ namespace System
 			inline void SetMonitorThreadId(unsigned long long iMonitorThreadId)
 			{
 				m_iMonitorThreadId = iMonitorThreadId;
+			}
+
+			// Get the CurWorkNum
+			inline int GetCurWorkNum()
+			{
+				std::lock_guard<std::mutex> Locker(m_CurWorkLock);
+
+				return m_iCurWorkNum;
+			}
+
+			// Set the CurWorkNum
+			inline void SetCurWorkNum(int iCurWorkNum)
+			{
+				std::lock_guard<std::mutex> Locker(m_CurWorkLock);
+
+				m_iCurWorkNum = iCurWorkNum;
 			}
 
 		private:
@@ -220,12 +247,24 @@ namespace System
 			// Lock for the task container
 			std::mutex m_TaskLock;
 
+			// Lock for the task container
+			std::mutex m_StopLock;
+
 			// Stop the pool
 			bool m_bStopPool;
+
+			// Lock for the task container
+			std::mutex m_ForceStopLock;
 
 			// Force to stop
 			bool m_bForceStop;
 
+			// Lock for the task container
+			std::mutex m_CurWorkLock;
+
+			// Current working thread number
+			int m_iCurWorkNum;
+		
 			// Error message
 			std::string m_strErrorText;
 

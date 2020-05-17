@@ -1,4 +1,5 @@
 #include "PreCompile.h"
+#include "EasyJson.h"
 #include "MicroCore.h"
 
 GENERATE_PLUGIN(MICRO_CORE_PLUGIN, MicroCore);
@@ -7,6 +8,7 @@ GENERATE_PLUGIN(MICRO_CORE_PLUGIN, MicroCore);
 MicroCore::MicroCore() :
 	m_pPluginController(NULL),
 	m_pThreadPool(NULL),
+	m_iThreadPoolSize(0),
 	m_bDisposed(false)
 {
 	Initialize();
@@ -21,6 +23,9 @@ MicroCore::~MicroCore()
 // Init the Kernel 
 None MicroCore::Initialize()
 {
+	// Load configure file
+	LoadConfiguration();
+
 	// Create thread pool
 	CreateThreadPool();
 
@@ -43,9 +48,59 @@ None MicroCore::Destory()
 	}
 }
 
+// Load configure file
+Boolean MicroCore::LoadConfiguration()
+{
+	// Get the file path
+	String strExeDirPath = Directory::AddEnding(Directory::GetExcutableDirectory());
+
+	String strPluginFilePath = strExeDirPath + PLUGIN_FILENAME;
+
+	// Read the configuration
+	JsonDocument JsonDoc;
+
+	EasyJson EasyJsonGetter;
+
+	if (!EasyJsonGetter.GetJsonDoc(strPluginFilePath, JsonDoc))
+	{
+		LOG_DEBUG_EX(EasyJsonGetter.GetErrorMsg());
+
+		return false;
+	}
+
+	JsonDocument PluginObject = JsonDoc.GetKeyValue(_T("Plugin"));
+	if (PluginObject.IsNull())
+	{
+		LOG_DEBUG_EX(JsonDoc.GetErrorMsg());
+
+		return false;
+	}
+
+	JsonDocument CoreObject = PluginObject.GetKeyValue("Core");
+	if (CoreObject.IsNull())
+	{
+		LOG_DEBUG_EX(PluginObject.GetErrorMsg());
+
+		return false;
+	}
+
+	Int32 iPoolSize = CoreObject.GetKeyValue("ThreadPoolSize").ToInt();
+
+	SetThreadPoolSize(iPoolSize);
+
+	return true;
+}
+
 // Create thread pool
 None MicroCore::CreateThreadPool()
 {
+	if (GetThreadPoolSize() != 0)
+	{
+		SetThreadPool(new ThreadPool(GetThreadPoolSize()));
+
+		return;
+	}
+	
 	SetThreadPool(new ThreadPool());
 }
 
@@ -129,21 +184,30 @@ Boolean MicroCore::StopPluginController()
 	return true;
 }
 
-// Push the task to thread pool
-bool MicroCore::AutoRun(TaskEntry& Task)
+// Auto run the task by core
+bool MicroCore::AutoRun(TaskEntry* pTask)
 {
-	if (GetThreadPool())
+	if (pTask == NULL)
 	{
-		return GetThreadPool()->AddTask(Task);
+		LOG_ERROR_EX("Task is invalid !");
+
+		return false;
 	}
 
-	return false;
+	if (GetThreadPool() == NULL)
+	{
+		LOG_ERROR_EX("Thread pool hasn't been created !");
+
+		return false;
+	}
+
+	return GetThreadPool()->AddTask(pTask);
 }
 
 // Start the micro Kernel
 Boolean MicroCore::Start()
 {
-	LOG_DEBUG_EX(_T("Startup the micro core"));
+	LOG_DEBUG_EX(_T("Micro core is starting ......"));
 
 	// Start a thread pool engine
 	StartThreadPool();
@@ -162,7 +226,7 @@ Boolean MicroCore::Start()
 // Stop the micro Kernel
 Boolean MicroCore::Stop()
 {
-	LOG_DEBUG_EX(_T("Shutdown the micro core"));
+	LOG_DEBUG_EX(_T("Micro core is shutdowning ......"));
 
 	// Stop the plugin center
 	if (!StopPluginController())

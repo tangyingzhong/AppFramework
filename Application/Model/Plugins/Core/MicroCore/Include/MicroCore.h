@@ -52,8 +52,8 @@ public:
 	// Release the plugin
 	virtual Boolean ReleasePlugin(IPlugin* pPlugin);
 
-	// Push the task to thread pool
-	virtual bool AutoRun(TaskEntry& Task);
+	// Auto run the task by core
+	virtual bool AutoRun(TaskEntry* pTask);
 
 private:
 	// Init the kernel 
@@ -61,6 +61,9 @@ private:
 
 	// Destory the kernel
 	None Destory();
+
+	// Load configure file
+	Boolean LoadConfiguration();
 
 	// Create a plugin controller
 	None CreatePluginController();
@@ -123,6 +126,18 @@ private:
 		m_pThreadPool = pThreadPool;
 	}
 
+	// Get the ThreadPoolSize
+	inline Int32 GetThreadPoolSize() const
+	{
+		return m_iThreadPoolSize;
+	}
+
+	// Set the ThreadPoolSize
+	inline void SetThreadPoolSize(Int32 iThreadPoolSize)
+	{
+		m_iThreadPoolSize = iThreadPoolSize;
+	}
+
 private:
 	// Plugin controller
 	PluginController m_pPluginController;
@@ -132,6 +147,9 @@ private:
 
 	// Thread pool
 	ThreadPooller m_pThreadPool;
+	
+	// Thread pool count
+	Int32 m_iThreadPoolSize;
 	
 	// Disposed status
 	Boolean m_bDisposed;

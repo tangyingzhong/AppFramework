@@ -53,8 +53,8 @@ public:
 	// Release the plugin
 	virtual Boolean ReleasePlugin(IPlugin* pPlugin);
 
-	// Asyn run the task
-	virtual bool AsynAutoRun(TaskEntry& Task);
+	// Excute the task
+	virtual bool Excute(TaskEntry* pTask);
 
 private:
 	// Init the context
@@ -65,6 +65,9 @@ private:
 
 	// Create micro core
 	None CreateMicroCore();
+
+	// Destory the micro core
+	None DestoryMicroCore();
 
 private:
 	// Get the Disposed

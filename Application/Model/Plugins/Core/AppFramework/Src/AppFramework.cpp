@@ -120,17 +120,24 @@ None AppFramework::CreateAppContext()
 	if (GetPluginLoader() == NULL)
 	{
 		SetAppContext(NULL);
+
+		return;
 	}	
 
-	if (!GetPluginLoader()->Load(APPLICATION_CONTEXT_NAME))
+	if (!GetPluginLoader()->IsValid())
 	{
-		SetAppContext(NULL);
-	}
-	else
-	{
-		IApplicationContext* pContext = (*m_pPluginLoader).Data();
+		GetPluginLoader()->Load(APPLICATION_CONTEXT_NAME);
 
-		SetAppContext(pContext);
+		if (GetPluginLoader()->IsValid())
+		{
+			IApplicationContext* pContext = (*m_pPluginLoader).Data();
+
+			SetAppContext(pContext);
+		}
+		else
+		{
+			SetAppContext(NULL);
+		}
 	}
 }
 

@@ -46,15 +46,31 @@ namespace System
 			}
 
 			// Set the Task
-			inline void SetTask(TaskEntry& task)
+			inline void SetTask(TaskEntry* pTask)
 			{
-				SetCurTask(task);
+				SetCurTask(pTask);
 			}
 
 			// Set the ExitThreadPool
 			void SetIsExitThreadPool(bool bExitThreadPool)
 			{
-				GetCurTask().SetIsExitPool(bExitThreadPool);
+				GetCurTask()->SetIsExitPool(bExitThreadPool);
+			}
+
+			// Get the TransferOk
+			inline bool GetTransferOk()
+			{
+				std::lock_guard<std::mutex> Locker(m_TransferLock);
+
+				return m_bTransferOk;
+			}
+
+			// Set the TransferOk
+			inline void SetTransferOk(bool bTransferOk)
+			{
+				std::lock_guard<std::mutex> Locker(m_TransferLock);
+
+				m_bTransferOk = bTransferOk;
 			}
 
 		private:
@@ -90,15 +106,15 @@ namespace System
 			}
 
 			// Get the Task
-			inline TaskEntry& GetCurTask()
+			inline TaskEntry* GetCurTask()
 			{
-				return m_Task;
+				return m_pTask;
 			}
 
 			// Set the Task
-			inline void SetCurTask(TaskEntry& Task)
+			inline void SetCurTask(TaskEntry* pTask)
 			{
-				m_Task = Task;
+				m_pTask = pTask;
 			}
 
 			// Set the ThreadId
@@ -115,10 +131,16 @@ namespace System
 			IThreadPool* m_pThreadPool;
 
 			// Task
-			TaskEntry m_Task;
+			TaskEntry* m_pTask;
 		
 			// Current thread
 			std::thread m_CurThread;
+
+			// Lock for the thread pool exit
+			std::mutex m_TransferLock;
+
+			// Is transfer task ok
+			bool m_bTransferOk;
 
 			// Disposed status
 			bool m_bDisposed;

@@ -6,7 +6,7 @@ GENERATE_PLUGIN(PLUGIN_MANAGER_PLUGIN, PluginManager);
 
 // Construct the Engine
 PluginManager::PluginManager() :
-	m_strPluginConfigureFilePath(_T("")),
+	m_strPluginFilePath(""),
 	m_bDisposed(false)
 {
 	Initialize();
@@ -37,36 +37,53 @@ None PluginManager::Destory()
 // Init the plugin configure file name
 None PluginManager::InitPluginConfigure()
 {
-	// Set the plugin configure filename
-	String strPluginDirPath = Directory::AddEnding(Directory::GetExcutableDirectory()) 
-		+ _T("Plugin\\Plugin.json");
+	// Get exe file path
+	String strExeDirPath = Directory::AddEnding(Directory::GetExcutableDirectory());
 
-	SetPluginConfigureFilePath(strPluginDirPath);
+	// Set the plugin configure file name
+	String strPluginFilePath = strExeDirPath + PLUGIN_FILENAME;
+
+	SetPluginFilePath(strPluginFilePath);
 }
 
 // Init the plugin name table
 None PluginManager::InitPluginNameTable()
 {
-	if (GetPluginConfigureFilePath().IsEmpty())
+	if (GetPluginFilePath().IsEmpty())
 	{
+		LOG_DEBUG_EX("Plugin file path is empty !");
+
 		return;
 	}
 
 	JsonDocument JsonDoc;
 
-	if (!EasyJson().GetJsonDoc(GetPluginConfigureFilePath(),JsonDoc))
+	EasyJson EasyJsonGetter;
+
+	if (!EasyJsonGetter.GetJsonDoc(GetPluginFilePath(),JsonDoc))
 	{
+		LOG_DEBUG_EX(EasyJsonGetter.GetErrorMsg());
+
 		return;
 	}
 
-	JsonDocument JsonPluginObject = JsonDoc.GetKeyValue(_T("Plugin"));
+	JsonDocument PluginObject = JsonDoc.GetKeyValue(_T("Plugin"));
 
-	JsonDocument JsonBusinessObject = JsonPluginObject.GetKeyValue(_T("Business"));
-	if (JsonBusinessObject.IsArray())
+	JsonDocument FundationObject = PluginObject.GetKeyValue(_T("Fundation"));
+	if (FundationObject.IsArray())
 	{
-		for (Index iIndex = 0; iIndex < (Index)JsonBusinessObject.Size(); ++iIndex)
+		for (Index iIndex = 0; iIndex < (Index)FundationObject.Size(); ++iIndex)
 		{
-			GetPluginNameTable().push_back(JsonBusinessObject[iIndex].ToString());
+			GetPluginNameTable().push_back(FundationObject[iIndex].ToString());
+		}
+	}
+
+	JsonDocument BusinessObject = PluginObject.GetKeyValue(_T("Business"));
+	if (BusinessObject.IsArray())
+	{
+		for (Index iIndex = 0; iIndex < (Index)BusinessObject.Size(); ++iIndex)
+		{
+			GetPluginNameTable().push_back(BusinessObject[iIndex].ToString());
 		}
 	}
 }
@@ -89,7 +106,7 @@ None PluginManager::ClearPluginMapTable()
 {
 	if (m_PluginMapTable.empty())
 	{
-		LOG_DEBUG(String(_T("Plugin table is None")), _T(""));
+		LOG_DEBUG_EX("There is no any plugin to release");
 
 		return;
 	}
@@ -103,7 +120,7 @@ None PluginManager::ClearPluginMapTable()
 
 		ModuleIter=m_PluginMapTable.erase(ModuleIter);
 
-		LOG_DEBUG(String(_T("Successfully destory plugin:%s")).Arg(strModuleName), _T(""));
+		LOG_DEBUG_EX(String(_T("Successfully destory plugin:%s")).Arg(strModuleName));
 	}
 
 	PluginMapTable().swap(m_PluginMapTable);
@@ -156,7 +173,7 @@ None PluginManager::CreatePluginModules(PluginNameTable& Table)
 {
 	if (Table.empty())
 	{
-		LOG_DEBUG(String(_T("Plugin table is None")), _T(""));
+		LOG_ERROR_EX("Plugin table is empty !");
 
 		return;
 	}
@@ -175,7 +192,7 @@ None PluginManager::CreatePluginModules(PluginNameTable& Table)
 		// Add the plugin module
 		RegisterModule(strPluginName, pPluginLoader);
 
-		LOG_DEBUG(String(_T("Successfully create plugin:%s")).Arg(strPluginName),_T(""));
+		LOG_DEBUG_EX(String("Successfully create plugin:%s").Arg(strPluginName));
 	}
 }
 
@@ -184,6 +201,8 @@ Boolean PluginManager::CreateModule(String strPluginName, Loader& pLoader)
 {
 	if (strPluginName.IsEmpty())
 	{
+		LOG_ERROR_EX("Failed to create module owing to plugin name is empty !");
+
 		return false;
 	}
 
@@ -246,11 +265,15 @@ Boolean PluginManager::UnRegisterModule(String strPluginName)
 {
 	if (strPluginName.IsEmpty())
 	{
+		LOG_ERROR_EX("Invalid plugin name when unregistering it !")
+
 		return false;
 	}
 
 	if (m_PluginMapTable.empty())
 	{
+		LOG_ERROR_EX("Plugin table is empty !")
+
 		return false;
 	}
 
@@ -261,6 +284,8 @@ Boolean PluginManager::UnRegisterModule(String strPluginName)
 		Loader pLoader = ModuleIter->second;
 
 		DestoryPlugin(pLoader);
+
+		m_PluginMapTable.erase(ModuleIter);
 	}
 
 	return true;
@@ -302,47 +327,51 @@ IPlugin* PluginManager::GetPlugin(String strPluginName,
 {
 	if (strPluginName.IsEmpty())
 	{
+		LOG_ERROR_EX("Plugin name is empty !");
+
 		return NULL;
 	}
 
 	if (iMajorVersion <= 0)
 	{
+		LOG_ERROR_EX("Invalid major version , iMajorVersion <= 0");
+
 		return NULL;
 	}
 
 	if (iMinorVersion < 0)
 	{
-		return false;
+		LOG_ERROR_EX("Invalid minor version , iMinorVersion < 0");
+
+		return NULL;
 	}
 
 	if (iModifyVersion < 0)
 	{
+		LOG_ERROR_EX("Invalid modify version , iModifyVersion < 0");
+
 		return NULL;
 	}
 
-	if (!m_PluginMapTable.empty())
+	if (m_PluginMapTable.empty())
 	{
-		PluginMapTable::iterator ModuleIter = m_PluginMapTable.find(strPluginName.ToANSIData());
+		LOG_ERROR_EX("Plugin table is empty now");
 
-		if (ModuleIter != m_PluginMapTable.end())
-		{
-			Loader pLoader = ModuleIter->second;
-
-			return pLoader->Data();
-		}
-	}
-
-	// Create the module
-	Loader pLoader;
-	if (!CreateModule(strPluginName, pLoader))
-	{
 		return NULL;
 	}
 
-	// Register the module
-	RegisterModule(strPluginName, pLoader);
+	PluginMapTable::iterator ModuleIter = m_PluginMapTable.find(strPluginName.ToANSIData());
 
-	return pLoader->Data();
+	if (ModuleIter != m_PluginMapTable.end())
+	{
+		Loader pLoader = ModuleIter->second;
+
+		return pLoader->Data();
+	}
+
+	LOG_ERROR_EX("Failed to load the plugin because of it is not configured in the plugin file");
+
+	return NULL;
 }
 
 // Release the plugin
@@ -353,7 +382,9 @@ Boolean PluginManager::ReleasePlugin(IPlugin* pPlugin)
 		return false;
 	}
 
-	UnRegisterModule(pPlugin->GetName());
+	// Get plugin name
+	String strPluginName = pPlugin->GetName();
 
-	return true;
+	// Get it off from the plugin table and destory it
+	return UnRegisterModule(strPluginName);
 }

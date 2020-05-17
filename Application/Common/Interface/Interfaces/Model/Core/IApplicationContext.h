@@ -33,8 +33,8 @@ public:
 	// Release the plugin
 	virtual Boolean ReleasePlugin(IPlugin* pPlugin) = 0;
 
-	// Asyn run the task
-	virtual bool AsynAutoRun(TaskEntry& Task) = 0;
+	// Excute the task
+	virtual bool Excute(TaskEntry* pTask) = 0;
 };
 
 #endif // IAPPLICATIONCONTEXT_H
