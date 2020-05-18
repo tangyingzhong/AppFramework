@@ -47,7 +47,7 @@ namespace System
 		ModuleLoader(const ModuleLoader& other) {	}
 
 		// Forbid the assigment of ModuleLoader
-		ModuleLoader& operator=(const ModuleLoader& other) { return *this; }
+		ModuleLoader& operator=(const ModuleLoader& other) {	}
 
 	public:
 		// Get module interface 

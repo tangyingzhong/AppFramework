@@ -10,7 +10,7 @@ namespace AppContext_UnitTest
 	TEST_CLASS(AppContextTest)
 	{
 	public:
-		TEST_METHOD(TestStartFunc)
+		TEST_METHOD(TestCoreThreadPoolFunc)
 		{
 			StartAppContext();
 
@@ -40,11 +40,11 @@ namespace AppContext_UnitTest
 
 			while (true)
 			{
-				Sleep(3000);
+				Sleep(60000);
 
 				SetExitTask(true);
 
-				Sleep(3000);
+				Sleep(60000);
 
 				SetExitTask1(true);
 
@@ -104,6 +104,9 @@ namespace AppContext_UnitTest
 	private:
 		// Callback count
 		Int m_iExcuteCount;
+
+		// Callback count
+		Int m_iExcuteCount1;
 
 		// Lock for the exit flag
 		std::mutex m_Lock;
@@ -208,7 +211,7 @@ namespace AppContext_UnitTest
 
 				// Do your business
 				std::string strData = std::string("我的线程执行次数:")
-					+ std::to_string(pThis->m_iExcuteCount++)
+					+ std::to_string(pThis->m_iExcuteCount1++)
 					+ "\r\n";
 
 				std::cout << strData;
