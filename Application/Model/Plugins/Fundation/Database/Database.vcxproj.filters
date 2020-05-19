@@ -2,23 +2,26 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Include">
-      <UniqueIdentifier>{a973a571-38eb-4d0e-9d11-1a8b700479a7}</UniqueIdentifier>
+      <UniqueIdentifier>{62b751a3-50fd-4aa6-bdeb-59b17e30ae2e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Src">
-      <UniqueIdentifier>{5413892e-ccb8-489a-83e2-0040fe7efafc}</UniqueIdentifier>
+      <UniqueIdentifier>{b9aecb1a-82e0-41e4-a83b-bff0deb230b8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\PreCompile.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="Include\SqliteDB.h">
+      <Filter>Include</Filter>
+    </ClInclude>
     <ClInclude Include="Include\targetver.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\LocalDB.h">
+    <ClInclude Include="Include\Database.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\SqliteDB.h">
+    <ClInclude Include="Include\IDb.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -29,10 +32,10 @@
     <ClCompile Include="Src\PreCompile.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\LocalDB.cpp">
+    <ClCompile Include="Src\SqliteDB.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\SqliteDB.cpp">
+    <ClCompile Include="Src\Database.cpp">
       <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>

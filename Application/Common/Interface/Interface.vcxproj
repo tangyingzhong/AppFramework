@@ -37,10 +37,11 @@
     <ClInclude Include="Interfaces\Common\IPlugin.h" />
     <ClInclude Include="Interfaces\Common\PluginBase.h" />
     <ClInclude Include="Interfaces\Common\PluginGenerator.h" />
+    <ClInclude Include="Interfaces\Model\Business\ILocalDB.h" />
     <ClInclude Include="Interfaces\Model\Core\IApplicationContext.h" />
     <ClInclude Include="Interfaces\Model\Core\IMicroCore.h" />
     <ClInclude Include="Interfaces\Model\Core\IPluginManager.h" />
-    <ClInclude Include="Interfaces\Model\Fundation\ILocalDB.h" />
+    <ClInclude Include="Interfaces\Model\Fundation\IDatabase.h" />
     <ClInclude Include="Interfaces\Model\Fundation\IPlayer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

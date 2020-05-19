@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\PreCompile.h" />
-    <ClInclude Include="Include\SqliteDB.h" />
     <ClInclude Include="Include\targetver.h" />
     <ClInclude Include="Include\LocalDB.h" />
   </ItemGroup>
@@ -33,7 +32,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Src\LocalDB.cpp" />
-    <ClCompile Include="Src\SqliteDB.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -116,14 +114,14 @@
       <PreprocessorDefinitions>EXPORT_FUNCTION;WIN32;_DEBUG;LOCALDB_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)ShareLib\Sqlite\include;$(SolutionDir)Application\Common\Interface\Interfaces</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Application\Model\Plugins\Fundation\Database\Include;$(SolutionDir)Application\Common\PluginLoader\Include;$(SolutionDir)Application\Common\Interface\Interfaces</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)ShareLib\Sqlite\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin_d</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Toolkit.lib;Common.lib;Interface.lib;PluginLoader.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Toolkit.lib;Interface.lib;PluginLoader.lib;Database.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\$(MSBuildProjectName).log</Path>
@@ -137,14 +135,15 @@
       <PreprocessorDefinitions>EXPORT_FUNCTION;_DEBUG;LOCALDB_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)ShareLib\Sqlite\include;$(SolutionDir)Application\Common\Interface\Interfaces</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Application\Model\Plugins\Fundation\Database\Include;$(SolutionDir)Application\Common\PluginLoader\Include;$(SolutionDir)Application\Common\Interface\Interfaces</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)ShareLib\Sqlite\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin_d</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Toolkit.lib;Common.lib;Interface.lib;PluginLoader.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Toolkit.lib;Interface.lib;PluginLoader.lib;Database.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\$(MSBuildProjectName).log</Path>
@@ -160,7 +159,7 @@
       <PreprocessorDefinitions>EXPORT_FUNCTION;WIN32;NDEBUG;LOCALDB_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)ShareLib\Sqlite\include;$(SolutionDir)Application\Common\Interface\Interfaces</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Application\Model\Plugins\Fundation\Database\Include;$(SolutionDir)Application\Common\PluginLoader\Include;$(SolutionDir)Application\Common\Interface\Interfaces</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -169,7 +168,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)ShareLib\Sqlite\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Toolkit.lib;Common.lib;Interface.lib;PluginLoader.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Toolkit.lib;Interface.lib;PluginLoader.lib;Database.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\$(MSBuildProjectName).log</Path>
@@ -185,7 +184,7 @@
       <PreprocessorDefinitions>EXPORT_FUNCTION;NDEBUG;LOCALDB_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)ShareLib\Sqlite\include;$(SolutionDir)Application\Common\Interface\Interfaces</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;$(SolutionDir)ShareLib\Toolkit\include;$(SolutionDir)Application\Model\Plugins\Fundation\Database\Include;$(SolutionDir)Application\Common\PluginLoader\Include;$(SolutionDir)Application\Common\Interface\Interfaces</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -194,7 +193,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)ShareLib\Sqlite\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Toolkit.lib;Common.lib;Interface.lib;PluginLoader.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Toolkit.lib;Interface.lib;PluginLoader.lib;Database.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\$(MSBuildProjectName).log</Path>

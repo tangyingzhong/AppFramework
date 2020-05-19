@@ -4,14 +4,13 @@
 #include "Tool/Encoding/UTF8.h"
 #include "SqliteDB.h"
 
-using namespace System::DataBase;
 using namespace System::Encoding;
 
 // Construct the SqliteDB
 SqliteDB::SqliteDB():
 	m_pDB(NULL), 
 	m_bIsOpen(false),
-	m_strErrorMessage(_T("")),
+	m_strErrorText(_T("")),
 	m_Disposed(false)
 {
 	Initialize();
@@ -45,6 +44,8 @@ Boolean SqliteDB::Open(String strDbFilePath)
 {
 	if (strDbFilePath.IsEmpty())
 	{
+		SetErrorText("Db file path is empty!");
+
 		return false;
 	}
 
@@ -59,7 +60,7 @@ Boolean SqliteDB::Open(String strDbFilePath)
 
 		String strError = Unicode::GetString(strAnsi, ENCODE_ANSI);
 
-		SetErrorMessage(strError);
+		SetErrorText(strError);
 
 		return false;
 	}
@@ -74,6 +75,8 @@ Boolean SqliteDB::IsOpen()
 {
 	if (GetDB()==NULL)
 	{
+		SetErrorText("Db object is null !");
+
 		return false;
 	}
 
@@ -90,6 +93,8 @@ None SqliteDB::Close()
 {
 	if (GetDB()==NULL)
 	{
+		SetErrorText("Db object is null !");
+
 		return;
 	}
 
@@ -103,7 +108,7 @@ Boolean SqliteDB::IsExistedTable(String strTableName)
 {
 	if (strTableName.IsEmpty())
 	{
-		SetErrorMessage("Table name is empty!");
+		SetErrorText("Table name is empty!");
 
 		return false;
 	}
@@ -144,7 +149,7 @@ Boolean SqliteDB::Excute(String strSql,Int32& iRetCode)
 
 		String strError = Unicode::GetString(strAnsi, ENCODE_ANSI);
 
-		SetErrorMessage(strError);
+		SetErrorText(strError);
 
 		return false;
 	}
@@ -161,7 +166,7 @@ Boolean SqliteDB::Excute(String strSql,Int32& iRetCode)
 
 		String strError = Unicode::GetString(strAnsi, ENCODE_ANSI);
 
-		SetErrorMessage(strError);
+		SetErrorText(strError);
 
 		sqlite3_finalize(pStmt);
 
@@ -196,7 +201,7 @@ Boolean SqliteDB::ExecuteNonQuery(String strSql, RecordTable& Table)
 
 		String strError = Unicode::GetString(strAnsi, ENCODE_ANSI);
 
-		SetErrorMessage(strError);
+		SetErrorText(strError);
 
 		return false;
 	}
@@ -235,4 +240,10 @@ Boolean SqliteDB::ExecuteNonQuery(String strSql, RecordTable& Table)
 	sqlite3_finalize(pStmt);
 
 	return true;
+}
+
+// Get the ErrorMessage
+String SqliteDB::GetErrorMsg()
+{
+	return GetErrorText();
 }

@@ -40,6 +40,8 @@ None PluginManager::InitPluginConfigure()
 	// Get exe file path
 	String strExeDirPath = Directory::AddEnding(Directory::GetExcutableDirectory());
 
+	//String strExeDirPath = String(_T("D:\\TangYingZhong\\TANG_CODE_COLLECTION\\Framework\\Build\\bin_d\\"));
+
 	// Set the plugin configure file name
 	String strPluginFilePath = strExeDirPath + PLUGIN_FILENAME;
 

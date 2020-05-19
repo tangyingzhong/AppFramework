@@ -62,9 +62,6 @@
     <ClInclude Include="Interfaces\Model\Core\IPluginManager.h">
       <Filter>Interfaces\Model\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Interfaces\Model\Fundation\ILocalDB.h">
-      <Filter>Interfaces\Model\Fundation</Filter>
-    </ClInclude>
     <ClInclude Include="Interfaces\Model\Fundation\IPlayer.h">
       <Filter>Interfaces\Model\Fundation</Filter>
     </ClInclude>
@@ -76,6 +73,12 @@
     </ClInclude>
     <ClInclude Include="Interfaces\Common\PluginGenerator.h">
       <Filter>Interfaces\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Model\Fundation\IDatabase.h">
+      <Filter>Interfaces\Model\Fundation</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\Model\Business\ILocalDB.h">
+      <Filter>Interfaces\Model\Business</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

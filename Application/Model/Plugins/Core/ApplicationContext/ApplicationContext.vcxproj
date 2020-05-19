@@ -145,6 +145,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Toolkit.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin_d\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\$(MSBuildProjectName).log</Path>
@@ -195,6 +196,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>Toolkit.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);$(SolutionDir)Build\bin\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\$(MSBuildProjectName).log</Path>

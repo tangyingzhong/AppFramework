@@ -11,13 +11,15 @@
 #ifndef LOCALDB_H
 #define LOCALDB_H
 
-#include "Model/Fundation/ILocalDB.h"
-#include "SqliteDB.h"
-
-using namespace System::DataBase;
+#include "Model/Business/ILocalDB.h"
+#include "Model/Fundation/IDatabase.h"
+#include "PluginLoader.h"
 
 class LocalDB:public PluginBase<ILocalDB>
 {
+public:
+	typedef IDatabase* DbHelper;
+
 public:
 	// Construct the LocalDB
 	LocalDB();
@@ -67,14 +69,17 @@ private:
 	// Destory the LocalDB
 	None Destory();
 
-	// Open the db
-	Boolean OpenDb();
+	// Create db helper
+	None CreateDbHelper();
 
-	// Close db
-	None CloseDb();
+	// Destory db helper
+	None DestoryDbHelper();
 
 	// Excute the sql
-	Boolean ExcuteSql(String strSql,Int32 iRetCode=0);
+	Boolean ExcuteSql(String strSql);
+
+	// Excute the sql
+	Boolean ExcuteSql(String strSql, RecordTable& Table);
 
 private:
 	// Get the DbFilePath
@@ -113,9 +118,24 @@ private:
 		m_strErrorMsg = strErrorMsg;
 	}
 
+	// Get the DBHelper
+	inline DbHelper GetDBHelper() const
+	{
+		return m_pDBHelper;
+	}
+
+	// Set the DBHelper
+	inline void SetDBHelper(DbHelper pDBHelper)
+	{
+		m_pDBHelper = pDBHelper;
+	}
+
 private:
-	// Sqlite db
-	SqliteDB m_DB;
+	// Database db
+	DbHelper m_pDBHelper;
+
+	// Plugin loader
+	PluginLoader<IDatabase> m_DbHelper;
 
 	// Db file path
 	String m_strDbFilePath;

@@ -148,6 +148,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);</AdditionalLibraryDirectories>
       <AdditionalDependencies>Toolkit.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\$(MSBuildProjectName).log</Path>
@@ -200,6 +201,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)ShareLib\Toolkit\lib\$(Platform)\$(Configuration);</AdditionalLibraryDirectories>
       <AdditionalDependencies>Toolkit.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
     </Link>
     <BuildLog>
       <Path>$(Configuration)\$(MSBuildProjectName).log</Path>

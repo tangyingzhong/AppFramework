@@ -3,11 +3,11 @@
 		"Core": {
 			"ThreadPoolSize": 8
 			},
-		"Fundation": [
-			"LocalDB",
+		"Fundation": [	
 			"Player"
 		],
 		"Business": [
+				"LocalDB"
 		]
 	}
 }
