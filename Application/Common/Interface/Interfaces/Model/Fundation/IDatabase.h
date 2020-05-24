@@ -17,8 +17,8 @@
 #include <vector>
 #include "Common/PluginGenerator.h"
 
-#define DATABASE _T("DataBase.dll")
-#define DATABASE_NAME _T("DataBase")
+#define DATABASE _T("Database.dll")
+#define DATABASE_NAME _T("Database")
 #define DATABASE_VERSION 1,0,0
 #define DATABASE_PLUGIN DATABASE_NAME,DATABASE_VERSION
 #define DATABASE_BASE_EVENT_ID  BASE_EVENT_ID +3600

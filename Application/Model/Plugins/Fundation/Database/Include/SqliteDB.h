@@ -13,13 +13,13 @@
 
 #include "Tool/BaseType/String.h"
 #include "Tool/Common/SystemType.h"
+#include "Model/Fundation/IDatabase.h"
 #include "sqlite3.h"
-#include "IDb.h"
 
 using namespace std;
 using namespace System::BasicType;
 
-class SqliteDB:public IDb
+class SqliteDB:public PluginBase<IDatabase>
 {
 public:
 	typedef sqlite3* SqliteDataBase;
@@ -40,10 +40,10 @@ private:
 	SqliteDB& operator=(const SqliteDB& other) { return *this; }
 
 public:
-	// Open the sqlite
+	// Open the database
 	virtual Boolean Open(String strDbFilePath);
 
-	// Close the sqlite
+	// Close the database
 	virtual None Close();
 
 	// Is opened or not

@@ -6,6 +6,8 @@
 
 using namespace System::Encoding;
 
+GENERATE_PLUGIN(DATABASE_PLUGIN, SqliteDB);
+
 // Construct the SqliteDB
 SqliteDB::SqliteDB():
 	m_pDB(NULL), 

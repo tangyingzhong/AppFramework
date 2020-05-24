@@ -18,12 +18,6 @@
     <ClInclude Include="Include\targetver.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Database.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\IDb.h">
-      <Filter>Include</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\dllmain.cpp">
@@ -33,9 +27,6 @@
       <Filter>Src</Filter>
     </ClCompile>
     <ClCompile Include="Src\SqliteDB.cpp">
-      <Filter>Src</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Database.cpp">
       <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,4 @@
 #include "PreCompile.h"
-#include "Database.h"
 #include "LocalDB.h"
 
 GENERATE_PLUGIN(LOCALDB_PLUGIN, LocalDB);
