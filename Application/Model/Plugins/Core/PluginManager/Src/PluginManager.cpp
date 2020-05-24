@@ -40,8 +40,6 @@ None PluginManager::InitPluginConfigure()
 	// Get exe file path
 	String strExeDirPath = Directory::AddEnding(Directory::GetExcutableDirectory());
 
-	//String strExeDirPath = String(_T("D:\\TangYingZhong\\TANG_CODE_COLLECTION\\Framework\\Build\\bin_d\\"));
-
 	// Set the plugin configure file name
 	String strPluginFilePath = strExeDirPath + PLUGIN_FILENAME;
 
@@ -154,7 +152,12 @@ PluginManager::Loader PluginManager::CreatePlugin(String strPluginName)
 
 	Loader pLoader=new PluginLoader<IPlugin>();
 
-	pLoader->Load(strPluginName);
+	if (!pLoader->Load(strPluginName))
+	{
+		String strErrorMsg = String("Failed to create plugin: %s").Arg(strPluginName);
+
+		LOG_ERROR_EX(strErrorMsg);
+	}
 
 	return pLoader;
 }
@@ -355,13 +358,6 @@ IPlugin* PluginManager::GetPlugin(String strPluginName,
 		return NULL;
 	}
 
-	if (m_PluginMapTable.empty())
-	{
-		LOG_ERROR_EX("Plugin table is empty now");
-
-		return NULL;
-	}
-
 	PluginMapTable::iterator ModuleIter = m_PluginMapTable.find(strPluginName.ToANSIData());
 
 	if (ModuleIter != m_PluginMapTable.end())
@@ -371,9 +367,15 @@ IPlugin* PluginManager::GetPlugin(String strPluginName,
 		return pLoader->Data();
 	}
 
-	LOG_ERROR_EX("Failed to load the plugin because of it is not configured in the plugin file");
+	// Create module if it is not configured in the plugin file
+	Loader pLoader = new PluginLoader<IPlugin>();
 
-	return NULL;
+	if (!CreateModule(strPluginName, pLoader))
+	{
+		return NULL;
+	}
+
+	return pLoader->Data();
 }
 
 // Release the plugin
