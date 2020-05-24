@@ -18,7 +18,6 @@
 #define EXCEL_NAME _T("Excel")
 #define EXCEL_VERSION 1,0,0
 #define EXCEL_PLUGIN EXCEL_NAME,EXCEL_VERSION
-#define EXCEL_BASE_EVENT_ID  BASE_EVENT_ID +3800
 
 enum HorizontalAlignEnum
 {

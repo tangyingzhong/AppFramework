@@ -19,7 +19,6 @@
 #define LOCALDB_NAME _T("LocalDB")
 #define LOCALDB_VERSION 1,0,0
 #define LOCALDB_PLUGIN LOCALDB_NAME,LOCALDB_VERSION
-#define LOCALDB_BASE_EVENT_ID  BASE_EVENT_ID +3500
 
 #include <string>
 #include <vector>

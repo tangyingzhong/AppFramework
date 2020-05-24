@@ -21,7 +21,6 @@
 #define DATABASE_NAME _T("Database")
 #define DATABASE_VERSION 1,0,0
 #define DATABASE_PLUGIN DATABASE_NAME,DATABASE_VERSION
-#define DATABASE_BASE_EVENT_ID  BASE_EVENT_ID +3600
 
 class IDatabase :public IPlugin
 {
