@@ -80,5 +80,8 @@
     <ClInclude Include="Interfaces\Model\Business\ILocalDB.h">
       <Filter>Interfaces\Model\Business</Filter>
     </ClInclude>
+    <ClInclude Include="Interfaces\Model\Fundation\IExcel.h">
+      <Filter>Interfaces\Model\Fundation</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
