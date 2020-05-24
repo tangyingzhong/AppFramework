@@ -4,6 +4,7 @@
 			"ThreadPoolSize": 8
 			},
 		"Fundation": [	
+			"Database",
 			"Player"
 		],
 		"Business": [
