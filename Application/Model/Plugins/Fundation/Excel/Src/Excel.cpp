@@ -9,7 +9,7 @@ Excel::Excel() :
 	m_pSheet(NULL),
 	m_pFont(NULL),
 	m_pFormat(NULL),
-	m_strErrorMessage(String("")),
+	m_strErrorMessage(""),
 	m_bIsClosed(false),
 	m_bDisposed(false)
 {
@@ -65,14 +65,14 @@ Boolean Excel::Load(String strExcelFilePath)
 {
 	if (strExcelFilePath.IsEmpty())
 	{
-		SetErrorMessage(String("Please input valid excel file path"));
+		SetErrorMessage("Please input valid excel file path");
 
 		return false;
 	}
 
 	if (GetBook()==NULL)
 	{
-		SetErrorMessage(String("Excel module hasn't been loaded"));
+		SetErrorMessage("Excel module hasn't been loaded");
 
 		return false;
 	}
@@ -97,7 +97,7 @@ Boolean Excel::SetWorkSheet(Int32 iIndex)
 {
 	if (iIndex<0)
 	{
-		SetErrorMessage(String("Invalid sheet index,maybe there is no such sheet index"));
+		SetErrorMessage("Invalid sheet index,maybe there is no such sheet index");
 
 		return false;
 	}
@@ -124,14 +124,14 @@ Boolean Excel::GetCell(Int32 iRowIndex, Int32 iColumnIndex, AlterType& AlterValu
 {
 	if (iRowIndex<0)
 	{
-		SetErrorMessage(String("Invalid row index,It must >=0"));
+		SetErrorMessage("Invalid row index,It must >=0");
 
 		return false;
 	}
 
 	if (iColumnIndex<0)
 	{
-		SetErrorMessage(String("Invalid column index,It must >=0"));
+		SetErrorMessage("Invalid column index,It must >=0");
 
 		return false;
 	}
@@ -139,7 +139,7 @@ Boolean Excel::GetCell(Int32 iRowIndex, Int32 iColumnIndex, AlterType& AlterValu
 	// Get the current sheet
 	if (GetSheet() == NULL)
 	{
-		SetErrorMessage(String("Please set the sheet by SetWorkSheet at first!"));
+		SetErrorMessage("Please set the sheet by SetWorkSheet at first!");
 
 		return false;
 	}
@@ -162,7 +162,7 @@ Boolean Excel::GetCell(Int32 iRowIndex, Int32 iColumnIndex, AlterType& AlterValu
 	break;
 	case libxl::CELLTYPE_STRING:
 	{
-		String strContect =String(GetSheet()->readStr(iRowIndex, iColumnIndex));
+		String strContect =GetSheet()->readStr(iRowIndex, iColumnIndex);
 
 		AlterValue = strContect.CStr();
 	}
@@ -197,14 +197,14 @@ Boolean Excel::GetColumn(Int32 iColIndex, ColumnTable& CTable)
 {
 	if (iColIndex<0)
 	{
-		SetErrorMessage(String("Invalid column index,it should >=0"));
+		SetErrorMessage("Invalid column index,it should >=0");
 
 		return false;
 	}
 
 	if (GetBook()==NULL)
 	{
-		SetErrorMessage(String("Excel module hasn't been loaded"));
+		SetErrorMessage("Excel module hasn't been loaded");
 
 		return false;
 	}
@@ -212,7 +212,7 @@ Boolean Excel::GetColumn(Int32 iColIndex, ColumnTable& CTable)
 	// Get the current sheet
 	if (GetSheet()==NULL)
 	{
-		SetErrorMessage(String("Please set the sheet by SetWorkSheet at first!"));
+		SetErrorMessage("Please set the sheet by SetWorkSheet at first!");
 
 		return false;
 	}
@@ -242,14 +242,14 @@ Boolean Excel::GetRow(Int32 iRowIndex, RowTable& RTable)
 {
 	if (iRowIndex < 0)
 	{
-		SetErrorMessage(String("Invalid row index,it should >=0"));
+		SetErrorMessage("Invalid row index,it should >=0");
 
 		return false;
 	}
 
 	if (GetBook() == NULL)
 	{
-		SetErrorMessage(String("Excel module hasn't been loaded"));
+		SetErrorMessage("Excel module hasn't been loaded");
 
 		return false;
 	}
@@ -257,7 +257,7 @@ Boolean Excel::GetRow(Int32 iRowIndex, RowTable& RTable)
 	// Get the current sheet
 	if (GetSheet() == NULL)
 	{
-		SetErrorMessage(String("Please set the sheet by SetWorkSheet at first!"));
+		SetErrorMessage("Please set the sheet by SetWorkSheet at first!");
 
 		return false;
 	}
@@ -315,7 +315,7 @@ Boolean Excel::GetColumnWidth(Int32 iColumnIndex, Real& dWidth)
 {
 	if (iColumnIndex<0)
 	{
-		SetErrorMessage(String("Invalid column index,It must >=0"));
+		SetErrorMessage("Invalid column index,It must >=0");
 
 		return false;
 	}
@@ -323,7 +323,7 @@ Boolean Excel::GetColumnWidth(Int32 iColumnIndex, Real& dWidth)
 	// Get the current sheet
 	if (GetSheet() == NULL)
 	{
-		SetErrorMessage(String("Please set the sheet by SetWorkSheet at first!"));
+		SetErrorMessage("Please set the sheet by SetWorkSheet at first!");
 
 		return false;
 	}
@@ -338,14 +338,14 @@ Boolean Excel::SetColumnWidth(Int32 iColumnIndex, Int32 iWidth)
 {
 	if (iColumnIndex < 0)
 	{
-		SetErrorMessage(String("Invalid column index,It must >=0"));
+		SetErrorMessage("Invalid column index,It must >=0");
 
 		return false;
 	}
 
 	if (iWidth <= 0)
 	{
-		SetErrorMessage(String("Invalid column width,It must >0"));
+		SetErrorMessage("Invalid column width,It must >0");
 
 		return false;
 	}
@@ -353,7 +353,7 @@ Boolean Excel::SetColumnWidth(Int32 iColumnIndex, Int32 iWidth)
 	// Get the current sheet
 	if (GetSheet() == NULL)
 	{
-		SetErrorMessage(String("Please set the sheet by SetWorkSheet at first!"));
+		SetErrorMessage("Please set the sheet by SetWorkSheet at first!");
 
 		return false;
 	}
@@ -366,7 +366,7 @@ Boolean Excel::GetRowHeight(Int32 iRowIndex, Real& dHeight)
 {
 	if (iRowIndex < 0)
 	{
-		SetErrorMessage(String("Invalid row index,It must >=0"));
+		SetErrorMessage("Invalid row index,It must >=0");
 
 		return false;
 	}
@@ -374,7 +374,7 @@ Boolean Excel::GetRowHeight(Int32 iRowIndex, Real& dHeight)
 	// Get the current sheet
 	if (GetSheet() == NULL)
 	{
-		SetErrorMessage(String("Please set the sheet by SetWorkSheet at first!"));
+		SetErrorMessage("Please set the sheet by SetWorkSheet at first!");
 
 		return false;
 	}
@@ -389,14 +389,14 @@ Boolean Excel::SetRowHeight(Int32 iRowIndex, Int32 iHeight)
 {
 	if (iRowIndex < 0)
 	{
-		SetErrorMessage(String("Invalid row index,It must >=0"));
+		SetErrorMessage("Invalid row index,It must >=0");
 
 		return false;
 	}
 
 	if (iHeight <= 0)
 	{
-		SetErrorMessage(String("Invalid row height,It must >0"));
+		SetErrorMessage("Invalid row height,It must >0");
 
 		return false;
 	}
@@ -404,7 +404,7 @@ Boolean Excel::SetRowHeight(Int32 iRowIndex, Int32 iHeight)
 	// Get the current sheet
 	if (GetSheet() == NULL)
 	{
-		SetErrorMessage(String("Please set the sheet by SetWorkSheet at first!"));
+		SetErrorMessage("Please set the sheet by SetWorkSheet at first!");
 
 		return false;
 	}
@@ -420,37 +420,51 @@ Boolean Excel::WriteCell(Int32 iRowIndex,
 {
 	if (iRowIndex < 0)
 	{
-		SetErrorMessage(String("Invalid row index,It must >=0"));
+		SetErrorMessage("Invalid row index,It must >=0");
 
 		return false;
 	}
 
 	if (iColumnIndex < 0)
 	{
-		SetErrorMessage(String("Invalid column index,It must >=0"));
+		SetErrorMessage("Invalid column index,It must >=0");
 
 		return false;
 	}
 
 	if (strValue.IsEmpty())
 	{
-		strValue = String("NULL");
+		strValue = "NULL";
 	}
 
 	// Get the current sheet
 	if (GetSheet() == NULL)
 	{
-		SetErrorMessage(String("Please set the sheet by SetWorkSheet at first!"));
+		SetErrorMessage("Please set the sheet by SetWorkSheet at first!");
 
 		return false;
 	}
 
 	if (bIsUseCellFormat)
 	{
-		return GetSheet()->writeStr(iRowIndex, iColumnIndex, strValue.CStr(), GetFormat());
+		if (!GetSheet()->writeStr(iRowIndex, iColumnIndex, strValue.CStr(), GetFormat()))
+		{
+			SetErrorMessage("Failed to write string value with format!");
+
+			return false;
+		}
+
+		return true;
 	}
 
-	return GetSheet()->writeStr(iRowIndex, iColumnIndex, strValue.CStr());
+	if (!GetSheet()->writeStr(iRowIndex, iColumnIndex, strValue.CStr()))
+	{
+		SetErrorMessage("Failed to write string value!");
+
+		return false;
+	}
+
+	return true;
 }
 
 // Write a cell
@@ -470,14 +484,14 @@ Boolean Excel::WriteCell(Int32 iRowIndex,
 {
 	if (iRowIndex < 0)
 	{
-		SetErrorMessage(String("Invalid row index,It must >=0"));
+		SetErrorMessage("Invalid row index,It must >=0");
 
 		return false;
 	}
 
 	if (iColumnIndex < 0)
 	{
-		SetErrorMessage(String("Invalid column index,It must >=0"));
+		SetErrorMessage("Invalid column index,It must >=0");
 
 		return false;
 	}
@@ -485,17 +499,31 @@ Boolean Excel::WriteCell(Int32 iRowIndex,
 	// Get the current sheet
 	if (GetSheet() == NULL)
 	{
-		SetErrorMessage(String("Please set the sheet by SetWorkSheet at first!"));
+		SetErrorMessage("Please set the sheet by SetWorkSheet at first!");
 
 		return false;
 	}
 
 	if (bIsUseCellFormat)
 	{
-		return GetSheet()->writeNum(iRowIndex, iColumnIndex, dValue, GetFormat());
+		if (!GetSheet()->writeNum(iRowIndex, iColumnIndex, dValue, GetFormat()))
+		{
+			SetErrorMessage("Failed to write double value with format !");
+
+			return false;
+		}
+
+		return true;
 	}
 
-	return GetSheet()->writeNum(iRowIndex, iColumnIndex, dValue);
+	if (!GetSheet()->writeNum(iRowIndex, iColumnIndex, dValue))
+	{
+		SetErrorMessage("Failed to write double value !");
+
+		return false;
+	}
+
+	return true;
 }
 
 // Write a cell
@@ -506,14 +534,14 @@ Boolean Excel::WriteCell(Int32 iRowIndex,
 {
 	if (iRowIndex < 0)
 	{
-		SetErrorMessage(String("Invalid row index,It must >=0"));
+		SetErrorMessage("Invalid row index,It must >=0");
 
 		return false;
 	}
 
 	if (iColumnIndex < 0)
 	{
-		SetErrorMessage(String("Invalid column index,It must >=0"));
+		SetErrorMessage("Invalid column index,It must >=0");
 
 		return false;
 	}
@@ -521,17 +549,31 @@ Boolean Excel::WriteCell(Int32 iRowIndex,
 	// Get the current sheet
 	if (GetSheet() == NULL)
 	{
-		SetErrorMessage(String("Please set the sheet by SetWorkSheet at first!"));
+		SetErrorMessage("Please set the sheet by SetWorkSheet at first!");
 
 		return false;
 	}
 
 	if (bIsUseCellFormat)
 	{
-		return GetSheet()->writeBool(iRowIndex, iColumnIndex, bValue, GetFormat());
+		if (!GetSheet()->writeBool(iRowIndex, iColumnIndex, bValue, GetFormat()))
+		{
+			SetErrorMessage("Failed to write bool value with format !");
+
+			return false;
+		}
+
+		return true;
 	}
 
-	return GetSheet()->writeBool(iRowIndex, iColumnIndex, bValue);
+	if (!GetSheet()->writeBool(iRowIndex, iColumnIndex, bValue))
+	{
+		SetErrorMessage("Failed to write bool value!");
+
+		return false;
+	}
+
+	return true;
 }
 
 // Write a cell
@@ -542,14 +584,14 @@ Boolean Excel::WriteCellByFormula(Int32 iRowIndex,
 {
 	if (iRowIndex < 0)
 	{
-		SetErrorMessage(String("Invalid row index,It must >=0"));
+		SetErrorMessage("Invalid row index,It must >=0");
 
 		return false;
 	}
 
 	if (iColumnIndex < 0)
 	{
-		SetErrorMessage(String("Invalid column index,It must >=0"));
+		SetErrorMessage("Invalid column index,It must >=0");
 
 		return false;
 	}
@@ -562,17 +604,31 @@ Boolean Excel::WriteCellByFormula(Int32 iRowIndex,
 	// Get the current sheet
 	if (GetSheet() == NULL)
 	{
-		SetErrorMessage(String("Please set the sheet by SetWorkSheet at first!"));
+		SetErrorMessage("Please set the sheet by SetWorkSheet at first!");
 
 		return false;
 	}
 
 	if (bIsUseCellFormat)
 	{
-		return GetSheet()->writeFormula(iRowIndex, iColumnIndex, strFormula.CStr(), GetFormat());
+		if (!GetSheet()->writeFormula(iRowIndex, iColumnIndex, strFormula.CStr(), GetFormat()))
+		{
+			SetErrorMessage("Failed to write formula with format !");
+
+			return false;
+		}
+
+		return true;
 	}
 
-	return GetSheet()->writeFormula(iRowIndex, iColumnIndex, strFormula.CStr());
+	if (!GetSheet()->writeFormula(iRowIndex, iColumnIndex, strFormula.CStr()))
+	{
+		SetErrorMessage("Failed to write formula!");
+
+		return false;
+	}
+
+	return true;
 }
 
 // Save the excel
@@ -580,26 +636,35 @@ Boolean Excel::Save(String strExcelFileName)
 {
 	if (strExcelFileName.IsEmpty())
 	{
-		SetErrorMessage(String("Save file path cannot be None!"));
+		SetErrorMessage("Save file path cannot be None!");
 
 		return false;
 	}
 
-	if (!strExcelFileName.IsContain(String(":")) && !strExcelFileName.IsContain(String("\\")))
+	if (!strExcelFileName.IsContain(":") && !strExcelFileName.IsContain("\\"))
 	{
-		SetErrorMessage(String("Please input valid path,such as \"D:\\A.xls\"!"));
+		SetErrorMessage("Please input valid path,such as \"D:\\A.xls\"!");
 
 		return false;
 	}
 
 	if (GetBook() == NULL)
 	{
-		SetErrorMessage(String("Excel module hasn't been loaded"));
+		SetErrorMessage("Excel module hasn't been loaded");
 
 		return false;
 	}
 
-	return GetBook()->save(strExcelFileName.CStr());
+	if (!GetBook()->save(strExcelFileName.CStr()))
+	{
+		std::string strErrorMsg = GetBook()->errorMessage();
+
+		SetErrorMessage(strErrorMsg);
+
+		return false;
+	}
+
+	return true;
 }
 
 // Release the excel
@@ -611,7 +676,7 @@ None Excel::Release()
 
 		if (GetBook() == NULL)
 		{
-			SetErrorMessage(String("Excel module hasn't been loaded"));
+			SetErrorMessage("Excel module hasn't been loaded");
 
 			return;
 		}

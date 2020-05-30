@@ -5,10 +5,14 @@ GENERATE_PLUGIN(LIBCURL_PLUGIN, LibCurl);
 
 Boolean LibCurl::m_bIsInit = false;
 
+LibCurl::CurlRun* LibCurl::m_pCurlRun = new LibCurl::CurlRun();
+
 // Construct the LibCurl
 LibCurl::LibCurl() :
+	m_bIsFtpUpload(false),
+	m_dUploadTotalSize(0.0),
 	m_pHeadList(NULL),
-	m_iTimeoutS(1),
+	m_iTimeoutS(60),
 	m_iErrorCode(CURLE_OK),
 	m_strErrorMsg(""),
 	m_bDisposed(false)
@@ -40,15 +44,18 @@ None LibCurl::Destory()
 // Init the curl
 None LibCurl::InitCurl()
 {
-	RetCode iRetCode = curl_global_init(CURL_GLOBAL_ALL);
+	if (!GetIsInit())
+	{
+		RetCode iRetCode = curl_global_init(CURL_GLOBAL_ALL);
 
-	if (iRetCode == CURLE_FAILED_INIT)
-	{
-		SetIsInit(false);
-	}
-	else
-	{
-		SetIsInit(true);
+		if (iRetCode == CURLE_FAILED_INIT)
+		{
+			SetIsInit(false);
+		}
+		else
+		{
+			SetIsInit(true);
+		}
 	}
 }
 
@@ -58,6 +65,8 @@ None LibCurl::DestoryCurl()
 	if (GetIsInit())
 	{
 		curl_global_cleanup();
+
+		SetIsInit(false);
 	}
 }
 
@@ -136,6 +145,23 @@ size_t LibCurl::OnReadData(void* buffer,
 }
 
 // Write data (Called by url inner)
+size_t LibCurl::OnWriteFileData(void* buffer,
+	size_t size,
+	size_t nmemb,
+	void* lpVoid)
+{
+	FILE* pFile = static_cast<FILE*>(lpVoid);
+	if (pFile == NULL)
+	{
+		return CURL_READFUNC_ABORT;
+	}
+
+	size_t nReadByte = fwrite(buffer, size, nmemb, pFile);
+
+	return nReadByte;
+}
+
+// Write data (Called by url inner)
 size_t LibCurl::OnWriteData(void* buffer,
 	size_t size,
 	size_t nmemb,
@@ -175,8 +201,15 @@ int LibCurl::ProgressCallback(void* pUserData,
 
 	if (pThis->m_TransPara.UploadFunc)
 	{
+		if (pThis->GetIsFtpUpload())
+		{
+			return pThis->m_TransPara.UploadFunc(pThis->m_TransPara.pUserData,
+				pThis->GetUploadTotalSize(),
+				NowUpload);
+		}
+
 		return pThis->m_TransPara.UploadFunc(pThis->m_TransPara.pUserData, 
-			TotalToUpload, 
+			TotalToUpload,
 			NowUpload);
 	}
 
@@ -267,7 +300,7 @@ None LibCurl::SetRequestHead(std::string strHeadType,
 // Post the request by http
 Boolean LibCurl::Post(std::string strRequestUrl,
 	std::string strRequestData,
-	std::string strResponseData,
+	std::string& strResponseData,
 	Object pUserData,
 	UploadProgress pUploadFunc,
 	DownLoadProgress pDownloadFunc)
@@ -377,7 +410,7 @@ Boolean LibCurl::Post(std::string strRequestUrl,
 // Get the respoend by http
 	Boolean LibCurl::Get(std::string strRequestUrl,
 		std::string strRequestData,
-		std::string strResponseData,
+		std::string& strResponseData,
 		Object pUserData,
 		UploadProgress pUploadFunc,
 		DownLoadProgress pDownloadFunc)
@@ -466,7 +499,7 @@ Boolean LibCurl::Post(std::string strRequestUrl,
 // Post the request by https (pCaPath==NULL : do not verify the certification on server)
 	Boolean LibCurl::Posts(std::string strRequestUrl,
 		std::string strRequestData,
-		std::string strResponseData,
+		std::string& strResponseData,
 		Object pUserData,
 		UploadProgress pUploadFunc,
 		DownLoadProgress pDownloadFunc ,
@@ -584,7 +617,7 @@ Boolean LibCurl::Post(std::string strRequestUrl,
 // Get the respoend by https (pCaPath==NULL : do not verify the certification on server)
 Boolean LibCurl::Gets(std::string strRequestUrl,
 	std::string strRequestData,
-	std::string strResponseData,
+	std::string& strResponseData,
 	Object pUserData,
 	UploadProgress pUploadFunc,
 	DownLoadProgress pDownloadFunc,
@@ -700,11 +733,12 @@ Boolean LibCurl::FtpUpload(const std::string strRemoteFilePath,
 	const std::string strLocalFilePath,
 	const std::string strUserName,
 	const std::string strPassword,
+	const std::string strPortNo,
+	UploadProgress pUploadFunc,
+	DownLoadProgress pDownloadFunc,
 	long TimeoutS,
 	Int32 iTryCount,
-	Object pUserData,
-	UploadProgress pUploadFunc,
-	DownLoadProgress pDownloadFunc)
+	Object pUserData)
 {
 	if (strLocalFilePath.empty())
 	{
@@ -733,8 +767,24 @@ Boolean LibCurl::FtpUpload(const std::string strRemoteFilePath,
 		pDownloadFunc,
 		pUserData);
 
+	SetTimeout(TimeoutS);
+
 	// Compose the user name and password
 	std::string strUserKey = strUserName + ":" + strPassword;
+
+	// Get file size
+	struct stat FileInfo;
+
+	curl_off_t iFileSize = -1;
+
+	if (stat(strLocalFilePath.c_str(), &FileInfo) == 0)
+	{
+		iFileSize = FileInfo.st_size;
+
+		SetUploadTotalSize(static_cast<Real>(iFileSize));
+
+		SetIsFtpUpload(true);
+	}
 
 	// Open the local file
 	FILE* pFile = NULL;
@@ -744,6 +794,10 @@ Boolean LibCurl::FtpUpload(const std::string strRemoteFilePath,
 	{
 		SetErrorInfo(CURLE_UNKNOWN_OPTION, "Failed to open local file!");
 
+		SetUploadTotalSize(0.0);
+
+		SetIsFtpUpload(false);
+
 		return false;
 	}
 
@@ -751,6 +805,10 @@ Boolean LibCurl::FtpUpload(const std::string strRemoteFilePath,
 	UrlHandle pHandle;
 	if (!CreateUrL(pHandle))
 	{
+		SetUploadTotalSize(0.0);
+
+		SetIsFtpUpload(false);
+
 		return false;
 	}
 
@@ -762,7 +820,7 @@ Boolean LibCurl::FtpUpload(const std::string strRemoteFilePath,
 
 	if (TimeoutS)
 	{
-		curl_easy_setopt(pHandle, CURLOPT_FTP_RESPONSE_TIMEOUT, TimeoutS);
+		curl_easy_setopt(pHandle, CURLOPT_FTP_RESPONSE_TIMEOUT, GetTimeoutS());
 	}
 	
 	curl_easy_setopt(pHandle, CURLOPT_HEADERFUNCTION, GetContentLength);
@@ -777,7 +835,7 @@ Boolean LibCurl::FtpUpload(const std::string strRemoteFilePath,
 
 	curl_easy_setopt(pHandle, CURLOPT_READDATA, pFile);
 
-	curl_easy_setopt(pHandle, CURLOPT_FTPPORT, "-");
+	curl_easy_setopt(pHandle, CURLOPT_FTPPORT, strPortNo.c_str());
 
 	curl_easy_setopt(pHandle, CURLOPT_FTP_CREATE_MISSING_DIRS, 1L);
 
@@ -833,11 +891,19 @@ Boolean LibCurl::FtpUpload(const std::string strRemoteFilePath,
 		// Destory the url
 		DestoryUrL(pHandle);
 
+		SetUploadTotalSize(0.0);
+
+		SetIsFtpUpload(false);
+
 		return false;
 	}
 
 	// Destory the url
 	DestoryUrL(pHandle);
+
+	SetUploadTotalSize(0.0);
+
+	SetIsFtpUpload(false);
 
 	return true;
 }
@@ -847,10 +913,12 @@ Boolean LibCurl::FtpDownload(const std::string strRemoteFilePath,
 	const std::string strLocalFilePath,
 	const std::string strUserName,
 	const std::string strPassword,
-	long TimeoutS,
-	Object pUserData,
+	const std::string strPortNo,
 	UploadProgress pUploadFunc,
-	DownLoadProgress pDownloadFunc)
+	DownLoadProgress pDownloadFunc,
+	long TimeoutS,
+	Int32 iTryCount,
+	Object pUserData)
 {
 	if (strLocalFilePath.empty())
 	{
@@ -879,6 +947,8 @@ Boolean LibCurl::FtpDownload(const std::string strRemoteFilePath,
 		pDownloadFunc,
 		pUserData);
 
+	SetTimeout(TimeoutS);
+
 	// Compose the user name and password
 	std::string strUserKey = strUserName + ":" + strPassword;
 
@@ -889,7 +959,7 @@ Boolean LibCurl::FtpDownload(const std::string strRemoteFilePath,
 
 	curl_off_t iLocalFileLength = -1;
 
-	if (stat(strLocalFilePath.c_str(),&FileInfo))
+	if (stat(strLocalFilePath.c_str(),&FileInfo) == 0)
 	{
 		iLocalFileLength = FileInfo.st_size;
 
@@ -922,13 +992,23 @@ Boolean LibCurl::FtpDownload(const std::string strRemoteFilePath,
 
 	curl_easy_setopt(pHandle, CURLOPT_HEADERFUNCTION, GetContentLength);
 
+	long iUploadLength = 0;
+
+	curl_easy_setopt(pHandle, CURLOPT_HEADERDATA, &iUploadLength);
+
 	long iFileSize = 0;
 
 	curl_easy_setopt(pHandle, CURLOPT_HEADERDATA, &iFileSize);
 
 	curl_easy_setopt(pHandle, CURLOPT_RESUME_FROM_LARGE, iUseResume ? iLocalFileLength : 0);
 
+	curl_easy_setopt(pHandle, CURLOPT_WRITEFUNCTION, OnWriteData);
+
+	curl_easy_setopt(pHandle, CURLOPT_WRITEFUNCTION, OnWriteFileData);
+
 	curl_easy_setopt(pHandle, CURLOPT_WRITEDATA, pFile);
+
+	curl_easy_setopt(pHandle, CURLOPT_FTPPORT, strPortNo.c_str());
 
 	{
 		curl_easy_setopt(pHandle, CURLOPT_NOPROGRESS, false);
@@ -940,7 +1020,35 @@ Boolean LibCurl::FtpDownload(const std::string strRemoteFilePath,
 
 	CURLcode eRetCode = CURLE_GOT_NOTHING;
 
-	eRetCode = curl_easy_perform(pHandle);
+	for (Int32 index = 0; (eRetCode != CURLE_OK) && (index < iTryCount); ++index)
+	{
+		if (index)
+		{
+			curl_easy_setopt(pHandle, CURLOPT_NOBODY, 1L);
+
+			curl_easy_setopt(pHandle, CURLOPT_HEADER, 1L);
+
+			eRetCode = curl_easy_perform(pHandle);
+			if (eRetCode != CURLE_OK)
+			{
+				continue;
+			}
+
+			curl_easy_setopt(pHandle, CURLOPT_NOBODY, 0L);
+
+			curl_easy_setopt(pHandle, CURLOPT_HEADER, 0L);
+
+			fseek(pFile, iUploadLength, SEEK_SET);
+
+			curl_easy_setopt(pHandle, CURLOPT_APPEND, 1L);
+		}
+		else
+		{
+			curl_easy_setopt(pHandle, CURLOPT_APPEND, 0L);
+		}
+
+		eRetCode = curl_easy_perform(pHandle);
+	}
 
 	// Finish the uploading
 	fclose(pFile);

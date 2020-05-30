@@ -26,6 +26,9 @@
     <ClCompile Include="ExcelTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LibUrlTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

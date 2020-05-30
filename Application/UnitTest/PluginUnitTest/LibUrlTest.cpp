@@ -1,50 +1,23 @@
 #include "pch.h"
 #include "CppUnitTest.h"
+#include "Model/Fundation/ILibCurl.h"
+#include "LibCurl.h"
+#include "PluginPtr.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace Tool_UnitTest
+namespace LibCurl_UnitTest
 {		
-	TEST_CLASS(LibCurl_UnitTest)
+	TEST_CLASS(LibCurlTest)
 	{
 	public:
 		TEST_METHOD(TestMethod_Post)
 		{
-			LibCurl CurlHelper;
+			LoadLibCurl();
 
-			TransPara Paramenter;
+			std::string strRespondData;
 
-			Paramenter.strRequestUrl = "http://192.168.0.101:8769/swk/equipment/info";
-
-			JsonDocument JasonArray;
-
-			JsonDocument JsonObj;
-
-			JsonObj.SetKeyValue(_T("equipmentId"), _T("SHENGYANG-13-VCS2000-006C4004JV002B6F1"));
-
-			JsonObj.SetKeyValue(_T("orgNo"), _T("132154625321"));
-
-			JsonObj.SetKeyValue(_T("orgName"), _T("广东省--深圳市香港中文大学研究院602"));
-
-			JsonObj.SetKeyValue(_T("ip"), _T("192.168.0.196"));
-
-			JsonObj.SetKeyValue(_T("mac"), _T("iopMAC"));
-
-			JsonObj.SetKeyValue(_T("systemName"), _T("SHENGYANG"));
-
-			JasonArray.Append(JsonObj);
-
-			String strUtf8Json = JasonArray.ToJson();
-
-			Paramenter.strPostPara = strUtf8Json.ToAnsiData();
-
-			Paramenter.iSecondTimeout = 1;
-
-			Int32 iErrorCode = 0;
-
-			String strErrorMsg = _T("");
-
-			Boolean bRet = CurlHelper.Post(Paramenter, iErrorCode,strErrorMsg);
+			Boolean bRet = LibCurlHelper->Post("https://www.baidu.com","yuer",strRespondData);
 
 			Assert::IsTrue(bRet);
 
@@ -52,28 +25,27 @@ namespace Tool_UnitTest
 
 			FileHelper.Open(_T("D:\\aaa.txt"), File::FileMode::CREATE);
 
-			FileHelper.Write(Paramenter.strResponse.c_str(),
-				0,
-				Paramenter.strResponse.size());
+			FileHelper.Write(strRespondData.c_str(),0,strRespondData.size());
 
 			FileHelper.Close();
 		}
 
 		TEST_METHOD(TestMethod_Get)
 		{
-			LibCurl CurlHelper;
+			LoadLibCurl();
 
-			TransPara Paramenter;
+			std::string strRespondData;
 
-			Paramenter.strRequestUrl = "http://192.168.0.101:48769/swk/equipment/notice/SHENGYANG-13-VCS2000-006C4004JV002B6F1";
+			Boolean bRet = LibCurlHelper->Get("https://www.baidu.com", "", strRespondData);
 
-			Paramenter.iSecondTimeout = 1;
+			if (!bRet)
+			{
+				Int32 iErrorCode = 0;
 
-			Int32 iErrorCode = 0;
-			
-			String strErrorMsg = _T("");
-
-			bool bRet = CurlHelper.Get(Paramenter, iErrorCode, strErrorMsg);
+				std::string strErrorMsg = "";
+				
+				LibCurlHelper->GetErrorInfo(iErrorCode, strErrorMsg);
+			}
 
 			Assert::IsTrue(bRet);
 
@@ -81,11 +53,40 @@ namespace Tool_UnitTest
 
 			FileHelper.Open(_T("D:\\aaa.txt"), File::FileMode::CREATE);
 
-			FileHelper.Write(Paramenter.strResponse.c_str(),
-				0,
-				Paramenter.strResponse.size());
+			FileHelper.Write(strRespondData.c_str(), 0, strRespondData.size());
 
 			FileHelper.Close();
 		}
+
+		TEST_METHOD(Test_FtpUpload)
+		{
+			LoadLibCurl();
+
+			bool bUploadOk = LibCurlHelper->FtpUpload("ftp://127.0.0.1/test/aaa2.txt", "D:\\Pool3.txt", "abc", "tang1028");
+
+			Assert::IsTrue(bUploadOk);
+		}
+
+		TEST_METHOD(Test_FtpDownload)
+		{
+			LoadLibCurl();
+
+			bool bUploadOk = LibCurlHelper->FtpDownload("ftp://127.0.0.1/test/aaa2.txt", "D:\\aaatest.txt", "abc", "tang1028");
+
+			Assert::IsTrue(bUploadOk);
+		}
+
+	private:
+		// Load curl
+		None LoadLibCurl()
+		{
+			Assert::IsTrue(LibCurlHelper.SetPluginVersion(LIBCURL_PLUGIN));
+
+			Assert::IsTrue(LibCurlHelper.IsValid());
+		}
+
+	private:
+		// Local db plugin
+		PluginPtr<ILibCurl> LibCurlHelper;
 	};
 }

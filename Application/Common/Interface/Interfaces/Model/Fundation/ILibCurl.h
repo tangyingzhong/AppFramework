@@ -103,7 +103,7 @@ public:
 	// Post the request by http
 	virtual Boolean Post(std::string strRequestUrl,
 		std::string strRequestData,
-		std::string strResponseData,
+		std::string& strResponseData,
 		Object pUserData = NULL,
 		UploadProgress pUploadFunc = NULL,
 		DownLoadProgress pDownloadFunc = NULL) = 0;
@@ -111,7 +111,7 @@ public:
 	// Get the respoend by http
 	virtual Boolean Get(std::string strRequestUrl,
 		std::string strRequestData,
-		std::string strResponseData,
+		std::string& strResponseData,
 		Object pUserData = NULL,
 		UploadProgress pUploadFunc = NULL,
 		DownLoadProgress pDownloadFunc = NULL) = 0;
@@ -119,7 +119,7 @@ public:
 	// Post the request by https (pCaPath==NULL : do not verify the certification on server)
 	virtual Boolean Posts(std::string strRequestUrl,
 		std::string strRequestData,
-		std::string strResponseData,
+		std::string& strResponseData,
 		Object pUserData = NULL,
 		UploadProgress pUploadFunc = NULL,
 		DownLoadProgress pDownloadFunc = NULL,
@@ -128,32 +128,35 @@ public:
 	// Get the respoend by https (pCaPath==NULL : do not verify the certification on server)
 	virtual Boolean Gets(std::string strRequestUrl,
 		std::string strRequestData,
-		std::string strResponseData,
+		std::string& strResponseData,
 		Object pUserData = NULL,
 		UploadProgress pUploadFunc = NULL,
 		DownLoadProgress pDownloadFunc = NULL,
 		const SByteArray pCaPath = NULL) = 0;
 
-	// Ftp upload
+	// Ftp upload (strRemoteFilePath: ftp://127.0.0.1/aa.txt)
 	virtual Boolean FtpUpload(const std::string strRemoteFilePath,
 		const std::string strLocalFilePath,
 		const std::string strUserName,
 		const std::string strPassword,
-		long TimeoutS = 0,
-		Int32 iTryCount = 3,
-		Object pUserData = NULL,
+		const std::string strPortNo = "21",
 		UploadProgress pUploadFunc = NULL,
-		DownLoadProgress pDownloadFunc = NULL) = 0;
+		DownLoadProgress pDownloadFunc = NULL,
+		long TimeoutS = 60,
+		Int32 iTryCount = 3,
+		Object pUserData = NULL) = 0;
 
-	// Ftp download
+	// Ftp download (strRemoteFilePath: ftp://127.0.0.1/aa.txt)
 	virtual Boolean FtpDownload(const std::string strRemoteFilePath,
 		const std::string strLocalFilePath,
 		const std::string strUserName,
 		const std::string strPassword,
-		long TimeoutS = 0,
-		Object pUserData = NULL,
+		const std::string strPortNo = "21",
 		UploadProgress pUploadFunc = NULL,
-		DownLoadProgress pDownloadFunc = NULL) = 0;
+		DownLoadProgress pDownloadFunc = NULL,
+		long TimeoutS = 60,
+		Int32 iTryCount = 3,
+		Object pUserData = NULL) = 0;
 
 	// Get the error std::string
 	virtual None GetErrorInfo(Int32& iErrorCode, std::string& strErrorMsg) = 0;

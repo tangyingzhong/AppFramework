@@ -21,6 +21,18 @@ public:
 	typedef struct curl_slist* HeadList;
 	typedef CURLcode RetCode;
 	typedef CURL* UrlHandle;
+	struct CurlRun
+	{
+		CurlRun()
+		{
+			LibCurl::InitCurl();
+		}
+
+		~CurlRun()
+		{
+			LibCurl::DestoryCurl();
+		}
+	};
 
 public:
 	// Construct the LibCurl
@@ -58,7 +70,7 @@ public:
 	// Post the request by http
 	virtual Boolean Post(std::string strRequestUrl,
 		std::string strRequestData,
-		std::string strResponseData,
+		std::string& strResponseData,
 		Object pUserData = NULL,
 		UploadProgress pUploadFunc = NULL,
 		DownLoadProgress pDownloadFunc = NULL);
@@ -66,7 +78,7 @@ public:
 	// Get the respoend by http
 	virtual Boolean Get(std::string strRequestUrl,
 		std::string strRequestData,
-		std::string strResponseData,
+		std::string& strResponseData,
 		Object pUserData = NULL,
 		UploadProgress pUploadFunc = NULL,
 		DownLoadProgress pDownloadFunc = NULL);
@@ -74,7 +86,7 @@ public:
 	// Post the request by https (pCaPath==NULL : do not verify the certification on server)
 	virtual Boolean Posts(std::string strRequestUrl,
 		std::string strRequestData,
-		std::string strResponseData,
+		std::string& strResponseData,
 		Object pUserData = NULL,
 		UploadProgress pUploadFunc = NULL,
 		DownLoadProgress pDownloadFunc = NULL,
@@ -83,32 +95,35 @@ public:
 	// Get the respoend by https (pCaPath==NULL : do not verify the certification on server)
 	virtual Boolean Gets(std::string strRequestUrl,
 		std::string strRequestData,
-		std::string strResponseData,
+		std::string& strResponseData,
 		Object pUserData = NULL,
 		UploadProgress pUploadFunc = NULL,
 		DownLoadProgress pDownloadFunc = NULL,
 		const SByteArray pCaPath = NULL);
 
-	// Ftp upload
+	// Ftp upload (strRemoteFilePath: ftp://127.0.0.1/aa.txt)
 	virtual Boolean FtpUpload(const std::string strRemoteFilePath,
 		const std::string strLocalFilePath,
 		const std::string strUserName,
 		const std::string strPassword,
-		long TimeoutS = 0,
-		Int32 iTryCount = 3,
-		Object pUserData = NULL,
+		const std::string strPortNo = "21",
 		UploadProgress pUploadFunc = NULL,
-		DownLoadProgress pDownloadFunc = NULL);
+		DownLoadProgress pDownloadFunc = NULL,
+		long TimeoutS = 60,
+		Int32 iTryCount = 3,
+		Object pUserData = NULL);
 
-	// Ftp download
+	// Ftp download (strRemoteFilePath: ftp://127.0.0.1/aa.txt)
 	virtual Boolean FtpDownload(const std::string strRemoteFilePath,
 		const std::string strLocalFilePath,
 		const std::string strUserName,
 		const std::string strPassword,
-		long TimeoutS = 0,
-		Object pUserData = NULL,
+		const std::string strPortNo = "21",
 		UploadProgress pUploadFunc = NULL,
-		DownLoadProgress pDownloadFunc = NULL);
+		DownLoadProgress pDownloadFunc = NULL,
+		long TimeoutS = 60,
+		Int32 iTryCount = 3,
+		Object pUserData = NULL);
 
 	// Get the error std::string
 	virtual None GetErrorInfo(Int32& iErrorCode, std::string& strErrorMsg);
@@ -161,6 +176,12 @@ private:
 
 	// Read data (Called by url inner)
 	static size_t OnReadData(void* buffer,
+		size_t size,
+		size_t nmemb,
+		void* lpVoid);
+
+	// Write data (Called by url inner)
+	static size_t OnWriteFileData(void* buffer,
 		size_t size,
 		size_t nmemb,
 		void* lpVoid);
@@ -238,12 +259,45 @@ private:
 		m_pHeadList = pHeadList;
 	}
 
+	// Get the UploadTotalSize
+	inline Real GetUploadTotalSize() const
+	{
+		return m_dUploadTotalSize;
+	}
+
+	// Set the UploadTotalSize
+	inline void SetUploadTotalSize(Real dUploadTotalSize)
+	{
+		m_dUploadTotalSize = dUploadTotalSize;
+	}
+
+	// Get the IsFtpUpload
+	inline Boolean GetIsFtpUpload() const
+	{
+		return m_bIsFtpUpload;
+	}
+
+	// Set the IsFtpUpload
+	inline void SetIsFtpUpload(Boolean bIsFtpUpload)
+	{
+		m_bIsFtpUpload = bIsFtpUpload;
+	}
+
 private:
 	// Is curl initialized
 	static Boolean m_bIsInit;
 
+	// Run the curl
+	static CurlRun* m_pCurlRun;
+
 	// Transfer paramenter
 	TransPara m_TransPara;
+
+	// Is Ftp upload
+	Boolean m_bIsFtpUpload;
+	
+	// Total size of uploading
+	Real m_dUploadTotalSize;
 
 	// Head list
 	HeadList m_pHeadList;

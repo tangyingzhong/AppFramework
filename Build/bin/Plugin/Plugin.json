@@ -5,7 +5,8 @@
 			},
 		"Fundation": [	
 			"Database",
-			"Player"
+			"Player",
+			"LibCurl"
 		],
 		"Business": [
 				"LocalDB"

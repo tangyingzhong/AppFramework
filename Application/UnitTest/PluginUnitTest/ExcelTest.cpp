@@ -16,9 +16,9 @@ namespace Excel_UnitTest
 
 			Assert::IsFalse(ExcelHelper->Load(_T("D:\\34.xlsx")));
 
-			Assert::IsFalse(ExcelHelper->Load(_T("D:软件参数对照表.xlsx")));
+			//Assert::IsTrue(ExcelHelper->Load(_T("D:软件参数对照表.xlsx")) == false);
 
-			Assert::IsFalse(ExcelHelper->Load(_T("D\\软件参数对照表.xlsx")));
+			//Assert::IsTrue(ExcelHelper->Load(_T("D\\软件参数对照表.xlsx")) == false);
 
 			Assert::IsTrue(ExcelHelper->Load(_T("D:\\软件参数对照表.xlsx")));
 		}
@@ -42,17 +42,25 @@ namespace Excel_UnitTest
 		{
 			LoadExcel();
 
-			Assert::IsTrue(ExcelHelper->Load(_T("D:\\软件参数对照表.xlsx")));
+			Assert::IsTrue(ExcelHelper->Load(_T("D:\\软件参数对照表.xls")));
 
 			IExcel::AlterType Value;
 
-			Assert::IsTrue(ExcelHelper->GetCell(3, 0, Value));
+			Assert::IsTrue(ExcelHelper->GetCell(0, 0, Value));
+
+			_bstr_t strValue0 = Value.bstrVal;
+
+			String strFinalValue0 = std::string(strValue0);
+
+			Assert::IsTrue(strFinalValue0 == _T("a"));
+
+			Assert::IsTrue(ExcelHelper->GetCell(1, 0, Value));
 
 			_bstr_t strValue = Value.bstrVal;
 
 			String strFinalValue = std::string(strValue);
 
-			Assert::IsTrue(strFinalValue == _T("唐新红"));
+			Assert::IsTrue(strFinalValue == _T("唐应忠"));
 
 			Assert::IsTrue(ExcelHelper->GetCell(40, 0, Value));
 
@@ -220,7 +228,9 @@ namespace Excel_UnitTest
 		{
 			LoadExcel();
 
-			Assert::IsTrue(ExcelHelper->Load(_T("D:\\软件参数对照表.xlsx")));
+			String strExcelPath = _T("D:\\软件参数对照表.xlsx");
+
+			Assert::IsTrue(ExcelHelper->Load(strExcelPath));
 
 			Assert::IsTrue(ExcelHelper->WriteCell(4, 1, 1000, false));
 
@@ -228,7 +238,7 @@ namespace Excel_UnitTest
 
 			Assert::IsTrue(ExcelHelper->WriteCellByFormula(6, 1, _T("SUM(B5:B6)"), false));
 
-			Assert::IsTrue(ExcelHelper->Save(_T("D:\\软件参数对照表.xlsx")));
+			Assert::IsTrue(ExcelHelper->Save(strExcelPath));
 		}
 
 		private:
