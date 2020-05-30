@@ -11,13 +11,10 @@
 #ifndef SQLITEDB_H
 #define SQLITEDB_H
 
-#include "Tool/BaseType/String.h"
-#include "Tool/Common/SystemType.h"
 #include "Model/Fundation/IDatabase.h"
 #include "sqlite3.h"
 
 using namespace std;
-using namespace System::BasicType;
 
 class SqliteDB:public PluginBase<IDatabase>
 {

@@ -1,10 +1,5 @@
 #include "PreCompile.h"
-#include "Tool/Encoding/Unicode.h"
-#include "Tool/Encoding/ANSI.h"
-#include "Tool/Encoding/UTF8.h"
 #include "SqliteDB.h"
-
-using namespace System::Encoding;
 
 GENERATE_PLUGIN(DATABASE_PLUGIN, SqliteDB);
 

@@ -83,5 +83,8 @@
     <ClInclude Include="Interfaces\Model\Fundation\IExcel.h">
       <Filter>Interfaces\Model\Fundation</Filter>
     </ClInclude>
+    <ClInclude Include="Interfaces\Model\Fundation\ILibCurl.h">
+      <Filter>Interfaces\Model\Fundation</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
