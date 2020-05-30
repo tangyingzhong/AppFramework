@@ -375,6 +375,14 @@ IPlugin* PluginManager::GetPlugin(String strPluginName,
 		return NULL;
 	}
 
+	// Register the module
+	if (!RegisterModule(strPluginName, pLoader))
+	{
+		DestoryModule(pLoader->Data());
+
+		return NULL;
+	}
+
 	return pLoader->Data();
 }
 
