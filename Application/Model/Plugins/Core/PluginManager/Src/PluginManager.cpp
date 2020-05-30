@@ -195,9 +195,14 @@ None PluginManager::CreatePluginModules(PluginNameTable& Table)
 		}
 
 		// Add the plugin module
-		RegisterModule(strPluginName, pPluginLoader);
+		if (!RegisterModule(strPluginName, pPluginLoader))
+		{
+			DestoryPlugin(pPluginLoader);
 
-		LOG_DEBUG_EX(String("Successfully create plugin:%s").Arg(strPluginName));
+			continue;
+		}
+
+		LOG_DEBUG_EX(String("Successfully register plugin:%s").Arg(strPluginName));
 	}
 }
 
@@ -368,7 +373,7 @@ IPlugin* PluginManager::GetPlugin(String strPluginName,
 	}
 
 	// Create module if it is not configured in the plugin file
-	Loader pLoader = new PluginLoader<IPlugin>();
+	Loader pLoader = NULL;
 
 	if (!CreateModule(strPluginName, pLoader))
 	{
@@ -378,7 +383,7 @@ IPlugin* PluginManager::GetPlugin(String strPluginName,
 	// Register the module
 	if (!RegisterModule(strPluginName, pLoader))
 	{
-		DestoryModule(pLoader->Data());
+		DestoryPlugin(pLoader);
 
 		return NULL;
 	}
