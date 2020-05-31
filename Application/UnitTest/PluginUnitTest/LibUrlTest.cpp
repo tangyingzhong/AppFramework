@@ -62,7 +62,10 @@ namespace LibCurl_UnitTest
 		{
 			LoadLibCurl();
 
-			bool bUploadOk = LibCurlHelper->FtpUpload("ftp://127.0.0.1/test/aaa2.txt", "D:\\Pool3.txt", "abc", "tang1028");
+			bool bUploadOk = LibCurlHelper->FtpUpload("ftp://127.0.0.1/test/aaa2.txt",
+				"D:\\Pool3.txt", 
+				"abc", 
+				"tang1028");
 
 			Assert::IsTrue(bUploadOk);
 		}
@@ -71,7 +74,10 @@ namespace LibCurl_UnitTest
 		{
 			LoadLibCurl();
 
-			bool bUploadOk = LibCurlHelper->FtpDownload("ftp://127.0.0.1/test/aaa2.txt", "D:\\aaatest.txt", "abc", "tang1028");
+			bool bUploadOk = LibCurlHelper->FtpDownload("ftp://127.0.0.1/test/aaa2.txt", 
+				"D:\\aaatest.txt",
+				"abc", 
+				"tang1028");
 
 			Assert::IsTrue(bUploadOk);
 		}

@@ -17,7 +17,7 @@ namespace Player_UnitTest
 			Assert::IsTrue(MyPlayer.IsValid());
 
 			std::thread t = std::thread([=, &MyPlayer] {
-				Assert::IsTrue(MyPlayer->Run(_T("D:\\林俊杰.-.[因你而在](2013)[WAV].wav")));
+				Assert::IsTrue(MyPlayer->Run(_T("D:\\Jon.wav")));
 				});
 
 			Sleep(60000);
