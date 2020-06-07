@@ -1,4 +1,3 @@
-#pragma once
 ///************************************************************************
 /// <copyrigth>2018-2019 Corporation.All Rights Reserved</copyrigth>
 /// <author>tangyingzhong</author>
